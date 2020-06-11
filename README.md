@@ -1,3 +1,3 @@
 # Hotel Booking
 
-Hello world!
+Hello World!
