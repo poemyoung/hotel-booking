@@ -1,24 +1,20 @@
-package com.hotelsystem.hotelsystem.service;
+package com.hotelbooking.hotelbooking.service;
 
-import com.github.pagehelper.PageInfo;
-import com.hotelsystem.hotelsystem.common.domain.Hotels;
-import com.hotelsystem.hotelsystem.common.domain.HotelsExample;
-import com.hotelsystem.hotelsystem.mapper.HotelsMapper;
+import com.hotelbooking.hotelbooking.common.domain.Hotels;
+import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
+import com.hotelbooking.hotelbooking.mapper.HotelsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class HotelsServiceImp implements HotelsService{
     @Autowired
     HotelsMapper hotelsMapper;
 
-    public ArrayList<Hotels> findHotels(String location,String checkInTime,String checkOutTime,int numOfCustomers){
+    public ArrayList<Hotels> findHotels(String location, String checkInTime, String checkOutTime, int numOfCustomers){
         HotelsExample hotelsExample = new HotelsExample();
 
         HotelsExample.Criteria criteria = hotelsExample.createCriteria();

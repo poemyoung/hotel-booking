@@ -1,4 +1,4 @@
-package com.hotelsystem.hotelsystem.common.domain;
+package com.hotelbooking.hotelbooking.common.domain;
 
 public class Hotels {
     private Integer hotelid;

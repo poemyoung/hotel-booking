@@ -1,7 +1,8 @@
-package com.hotelsystem.hotelsystem.mapper;
+package com.hotelbooking.hotelbooking.mapper;
 
-import com.hotelsystem.hotelsystem.common.domain.Hotels;
-import com.hotelsystem.hotelsystem.common.domain.HotelsExample;
+import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
+import com.hotelbooking.hotelbooking.common.domain.Hotels;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

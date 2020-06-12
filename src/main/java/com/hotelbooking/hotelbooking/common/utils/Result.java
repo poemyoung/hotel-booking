@@ -1,4 +1,4 @@
-package com.demo.springboot.helloworld.common.utils;
+package com.hotelbooking.hotelbooking.common.utils;
 
 import java.util.Collection;
 import java.util.HashMap;

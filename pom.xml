@@ -8,17 +8,11 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-<<<<<<< HEAD
-    <groupId>com.hotelsystem</groupId>
-    <artifactId>hotel-system</artifactId>
+
+    <groupId>com.hotelbooking</groupId>
+    <artifactId>hotel-booking</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hotel-system</name>
-=======
-    <groupId>com.hotelsystem.hotelsystem</groupId>
-    <artifactId>hotelsystem.hotelsystem</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>hotelsystem.hotelsystem</name>
->>>>>>> 41115843e19d2ef4aa75a910e3a57f77dd1c292e
+    <name>hotel-booking</name>
 
 
     <properties>

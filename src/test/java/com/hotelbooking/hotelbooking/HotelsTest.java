@@ -1,9 +1,8 @@
-package com.hotelsystem.hotelsystem;
+package com.hotelbooking.hotelbooking;
 
-import com.hotelsystem.hotelsystem.common.domain.Hotels;
-import com.hotelsystem.hotelsystem.common.domain.HotelsExample;
-import com.hotelsystem.hotelsystem.mapper.HotelsMapper;
-import org.junit.jupiter.api.AfterAll;
+import com.hotelbooking.hotelbooking.common.domain.Hotels;
+import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
+import com.hotelbooking.hotelbooking.mapper.HotelsMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
