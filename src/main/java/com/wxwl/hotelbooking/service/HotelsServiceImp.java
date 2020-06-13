@@ -3,15 +3,17 @@ package com.wxwl.hotelbooking.service;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.domain.HotelsExample;
 import com.wxwl.hotelbooking.mapper.HotelsMapper;
+import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class HotelsServiceImp implements HotelsService{
-    @Autowired
+    @Autowired(required = false)
     HotelsMapper hotelsMapper;
 
     public ArrayList<Hotels> findHotels(String location, String checkInTime, String checkOutTime, int numOfCustomers){

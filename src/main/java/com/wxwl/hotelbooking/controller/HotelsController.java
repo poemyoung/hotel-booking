@@ -23,6 +23,11 @@ public class HotelsController {
         modelMap.put("hotels",list);
         String msg = "查询成功";
         modelMap.put("msg",msg);
+        if(list.size() == 0){
+            System.out.println("为000000000");
+        }else {
+            System.out.println("为11111111111");
+        }
 
         return "success";
     }
