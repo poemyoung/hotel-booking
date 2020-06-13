@@ -14,7 +14,6 @@ public class HotelsController {
     @Autowired
     HotelsService hotelsService;
 
-
     @GetMapping("/hotels")
     public String findHotels(ModelMap modelMap,String location,
                              @RequestParam(defaultValue = "2020-6-12") String checkInTime,
@@ -24,6 +23,7 @@ public class HotelsController {
         modelMap.put("hotels",list);
         String msg = "查询成功";
         modelMap.put("msg",msg);
+
         return "success";
     }
 

@@ -1,5 +1,8 @@
 package com.wxwl.hotelbooking.common.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Hotels {
     private Integer hotelid;
 
