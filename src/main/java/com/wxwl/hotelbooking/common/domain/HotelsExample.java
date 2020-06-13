@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.common.domain;
+package com.wxwl.hotelbooking.common.domain;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.hotelbooking.hotelbooking.service;
+package com.wxwl.hotelbooking.service;
 
-import com.hotelbooking.hotelbooking.common.domain.Hotels;
-import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
-import com.hotelbooking.hotelbooking.mapper.HotelsMapper;
+import com.wxwl.hotelbooking.common.domain.Hotels;
+import com.wxwl.hotelbooking.common.domain.HotelsExample;
+import com.wxwl.hotelbooking.mapper.HotelsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

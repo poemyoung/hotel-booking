@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking;
+package com.wxwl.hotelbooking;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

@@ -1,6 +1,6 @@
-package com.hotelbooking.hotelbooking.service;
+package com.wxwl.hotelbooking.service;
 
-import com.hotelbooking.hotelbooking.common.domain.Hotels;
+import com.wxwl.hotelbooking.common.domain.Hotels;
 
 import java.util.ArrayList;
 

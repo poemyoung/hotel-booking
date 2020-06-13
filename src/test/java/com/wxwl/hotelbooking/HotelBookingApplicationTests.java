@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking;
+package com.wxwl.hotelbooking;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

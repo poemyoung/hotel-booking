@@ -1,8 +1,8 @@
-package com.hotelbooking.hotelbooking;
+package com.wxwl.hotelbooking;
 
-import com.hotelbooking.hotelbooking.common.domain.Hotels;
-import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
-import com.hotelbooking.hotelbooking.mapper.HotelsMapper;
+import com.wxwl.hotelbooking.common.domain.Hotels;
+import com.wxwl.hotelbooking.common.domain.HotelsExample;
+import com.wxwl.hotelbooking.mapper.HotelsMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

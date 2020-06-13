@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hotelbooking.hotelbooking.mapper.HotelsMapper">
-  <resultMap id="BaseResultMap" type="com.hotelbooking.hotelbooking.common.domain.Hotels">
+<mapper namespace="com.wxwl.hotelbooking.mapper.HotelsMapper">
+  <resultMap id="BaseResultMap" type="com.wxwl.hotelbooking.common.domain.Hotels">
     <id column="hotelId" jdbcType="INTEGER" property="hotelid" />
     <result column="chainId" jdbcType="INTEGER" property="chainid" />
     <result column="brandId" jdbcType="INTEGER" property="brandid" />
@@ -93,7 +93,7 @@
     yearOpened, yearRenovated, photoOne, photoTwo, photoThree, photoFour, photoFive, 
     overview, minPrice, numberOfReviews, averageRating
   </sql>
-  <select id="selectByExample" parameterType="com.hotelbooking.hotelbooking.common.domain.HotelsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.wxwl.hotelbooking.common.domain.HotelsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -117,13 +117,13 @@
     delete from hotels
     where hotelId = #{hotelid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hotelbooking.hotelbooking.common.domain.HotelsExample">
+  <delete id="deleteByExample" parameterType="com.wxwl.hotelbooking.common.domain.HotelsExample">
     delete from hotels
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hotelbooking.hotelbooking.common.domain.Hotels">
+  <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Hotels">
     insert into hotels (hotelId, chainId, brandId, 
       hotelName, hotelFormerlyName, hotelTranslatedName, 
       address, zipcode, starRating, 
@@ -143,7 +143,7 @@
       #{photofive,jdbcType=VARCHAR}, #{overview,jdbcType=VARCHAR}, #{minprice,jdbcType=INTEGER}, 
       #{numberofreviews,jdbcType=INTEGER}, #{averagerating,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.hotelbooking.hotelbooking.common.domain.Hotels">
+  <insert id="insertSelective" parameterType="com.wxwl.hotelbooking.common.domain.Hotels">
     insert into hotels
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="hotelid != null">
@@ -306,7 +306,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hotelbooking.hotelbooking.common.domain.HotelsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.wxwl.hotelbooking.common.domain.HotelsExample" resultType="java.lang.Long">
     select count(*) from hotels
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -430,7 +430,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hotelbooking.hotelbooking.common.domain.Hotels">
+  <update id="updateByPrimaryKeySelective" parameterType="com.wxwl.hotelbooking.common.domain.Hotels">
     update hotels
     <set>
       <if test="chainid != null">
@@ -511,7 +511,7 @@
     </set>
     where hotelId = #{hotelid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hotelbooking.hotelbooking.common.domain.Hotels">
+  <update id="updateByPrimaryKey" parameterType="com.wxwl.hotelbooking.common.domain.Hotels">
     update hotels
     set chainId = #{chainid,jdbcType=INTEGER},
       brandId = #{brandid,jdbcType=INTEGER},

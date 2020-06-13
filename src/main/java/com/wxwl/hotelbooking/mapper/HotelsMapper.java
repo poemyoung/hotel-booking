@@ -1,7 +1,7 @@
-package com.hotelbooking.hotelbooking.mapper;
+package com.wxwl.hotelbooking.mapper;
 
-import com.hotelbooking.hotelbooking.common.domain.HotelsExample;
-import com.hotelbooking.hotelbooking.common.domain.Hotels;
+import com.wxwl.hotelbooking.common.domain.HotelsExample;
+import com.wxwl.hotelbooking.common.domain.Hotels;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

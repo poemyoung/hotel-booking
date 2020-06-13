@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.common.utils;
+package com.wxwl.hotelbooking.common.utils;
 
 import java.util.Collection;
 import java.util.HashMap;
