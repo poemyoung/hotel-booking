@@ -20,7 +20,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 实体类-->
-        <javaModelGenerator targetPackage="com.hotelsystem.hotelsystem.common.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.wxwl.hotelbooking.common.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -29,7 +29,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--Dao 接口-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hotelsystem.hotelsystem.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wxwl.hotelbooking.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>

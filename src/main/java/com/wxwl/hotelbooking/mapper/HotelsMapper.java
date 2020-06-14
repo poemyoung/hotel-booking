@@ -1,14 +1,10 @@
 package com.wxwl.hotelbooking.mapper;
 
-import com.wxwl.hotelbooking.common.domain.HotelsExample;
 import com.wxwl.hotelbooking.common.domain.Hotels;
-
+import com.wxwl.hotelbooking.common.domain.HotelsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface HotelsMapper {
     long countByExample(HotelsExample example);
 

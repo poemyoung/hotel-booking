@@ -68,4 +68,8 @@ public class HotelsTest {
         System.out.println();
 
     }
+    @Test
+    public void whyNulPointer(){
+        System.out.println(hotelsMapper == null);
+    }
 }

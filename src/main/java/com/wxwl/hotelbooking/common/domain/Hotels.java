@@ -1,8 +1,5 @@
 package com.wxwl.hotelbooking.common.domain;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Hotels {
     private Integer hotelid;
 
@@ -262,37 +259,5 @@ public class Hotels {
 
     public void setAveragerating(Double averagerating) {
         this.averagerating = averagerating;
-    }
-
-    @Override
-    public String toString() {
-        return "Hotels{" +
-                "hotelid=" + hotelid +
-                ", chainid=" + chainid +
-                ", brandid=" + brandid +
-                ", hotelname='" + hotelname + '\'' +
-                ", hotelformerlyname='" + hotelformerlyname + '\'' +
-                ", hoteltranslatedname='" + hoteltranslatedname + '\'' +
-                ", address='" + address + '\'' +
-                ", zipcode=" + zipcode +
-                ", starrating=" + starrating +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", checkin='" + checkin + '\'' +
-                ", checkout='" + checkout + '\'' +
-                ", numberrooms=" + numberrooms +
-                ", numberfloors=" + numberfloors +
-                ", yearopened=" + yearopened +
-                ", yearrenovated=" + yearrenovated +
-                ", photoone='" + photoone + '\'' +
-                ", phototwo='" + phototwo + '\'' +
-                ", photothree='" + photothree + '\'' +
-                ", photofour='" + photofour + '\'' +
-                ", photofive='" + photofive + '\'' +
-                ", overview='" + overview + '\'' +
-                ", minprice=" + minprice +
-                ", numberofreviews=" + numberofreviews +
-                ", averagerating=" + averagerating +
-                '}';
     }
 }
