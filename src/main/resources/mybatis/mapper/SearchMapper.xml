@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxwl.hotelbooking.mapper.SearchMapper">
+    <sql id="Hotel_Result_List">
+        hotelId, chainName, brandName, hotelName, hotelFormerlyName, hotelTranslatedName, address,
+    zipcode, starRating, longitude, latitude, checkin, checkout, numberRooms, numberFloors,
+    yearOpened, yearRenovated, photoOne, photoTwo, photoThree, photoFour, photoFive,
+    overview, minPrice, numberOfReviews, averageRating
+    </sql>
+
+    <sql id="Rooms_Exists">
+        select rooms.id,rooms.hotelId,rooms.capacity,rooms.count
+        from rooms
+        where rooms.count > 0
+    </sql>
+
+    <sql id="Time_Right">
+        select reserve.
+    </sql>
+
+
+    <select id="selectChainId" resultType="HotelResult">
+            <include refid="Hotel_Result_List"></include>
+            FROM
+
+    </select>
+
+
+</mapper>

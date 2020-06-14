@@ -6,9 +6,7 @@ import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.HotelsService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @Api("酒店搜索相关Api")
 public class HotelsController {
     @Autowired
@@ -38,7 +37,6 @@ public class HotelsController {
                                              @RequestParam(defaultValue = "2020-6-12") String checkInTime,
                                              @RequestParam(defaultValue = "2020-6-13") String checkOutTime,
                                              @RequestParam(defaultValue = "2") int numOfCustomers){
-        System.out.println("location="+location);
         List<Hotels> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers);
         Result res = new Result();
         if(list == null){

@@ -6,7 +6,6 @@ import com.wxwl.hotelbooking.mapper.HotelsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -48,6 +47,11 @@ public class HotelsService {
         //执行
        example.or(criteria1);
         example.or(criteria2);
+
+
+
+
+
         hotels = mapper.selectByExample(example);
         return hotels;
     }
