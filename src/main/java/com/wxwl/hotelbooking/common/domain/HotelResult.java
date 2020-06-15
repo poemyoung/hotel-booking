@@ -3,9 +3,9 @@ package com.wxwl.hotelbooking.common.domain;
 public class HotelResult {
     private Integer hotelid;
 
-    private String chainName;
+    private String chainname;
 
-    private String brandName;
+    private String brandname;
 
     private String hotelname;
 
@@ -19,21 +19,22 @@ public class HotelResult {
         this.hotelid = hotelid;
     }
 
-    public String getChainName() {
-        return chainName;
+    public String getChainname() {
+        return chainname;
     }
 
-    public void setChainName(String chainName) {
-        this.chainName = chainName;
+    public void setChainname(String chainname) {
+        this.chainname = chainname;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getBrandname() {
+        return brandname;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setBrandname(String brandname) {
+        this.brandname = brandname;
     }
+
 
     public String getHotelname() {
         return hotelname;

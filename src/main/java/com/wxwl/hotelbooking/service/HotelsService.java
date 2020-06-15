@@ -89,4 +89,8 @@ public class HotelsService {
         return sqlDate;
     }
 
+    public static void main(String[] args) throws ParseException {
+        HotelsService a = new HotelsService();
+       System.out.println(a.stringToDate("2020-05-20").getTime());
+    }
 }
