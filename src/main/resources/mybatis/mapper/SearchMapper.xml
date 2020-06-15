@@ -8,21 +8,58 @@
     overview, minPrice, numberOfReviews, averageRating
     </sql>
 
-    <sql id="Rooms_Exists">
-        select rooms.id,rooms.hotelId,rooms.capacity,rooms.count
-        from rooms
-        where rooms.count > 0
+    <sql id="Time_Right">
+        select reserve.roomId,count(reserve.id) as roomsOccupied
+        from reserve
+        <where>
+            <if test="checkIn != null">
+                (reserve.checkInAt &gt; #{checkIn}
+                and reserve.checInAt &lt; #{checkOut})
+            </if>
+            or
+            <if test="checkOut != null">
+                (reserve.checkOutAt &gt; #{checkIn}
+                and reserve.checOutAt &lt; #{checkOut})
+            </if>
+        </where>
+        group by reserve.roomId
     </sql>
 
-    <sql id="Time_Right">
-        select reserve.
+    <sql id="Rooms_Exists">
+        select rooms.id,rooms.hotelId,((rooms.count-roomsOccupied)*roomsCapacity) as roomsCap
+        from rooms
+        left join
+        <include refid="Time_Right"></include>
+        rav
+        where rooms.count - rav.roomsOccupied > 0
     </sql>
+
 
 
     <select id="selectChainId" resultType="HotelResult">
+            select
             <include refid="Hotel_Result_List"></include>
             FROM
-
+            (select hotelId
+            from hotels
+            where hotelId in
+            <foreach collection="hotelList" index="index" item="hotel">
+                #{hotel.hotelId}
+            </foreach>
+            ) rh
+            left  join
+            <include refid="Rooms_Exists"></include>
+            rr
+            on rh.id = rr.id
+            left join chains
+            on chains.chainId = rh.chainId
+            left join brands
+            on brands.brandId = rh.brandId
+            <where>
+                <if test="num > 0">
+                    roomsCap > num
+                </if>
+            </where>
     </select>
 
 

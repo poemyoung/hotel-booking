@@ -1,18 +1,27 @@
 package com.wxwl.hotelbooking.service;
 
+import com.wxwl.hotelbooking.common.domain.HotelResult;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.domain.HotelsExample;
 import com.wxwl.hotelbooking.mapper.HotelsMapper;
+import com.wxwl.hotelbooking.mapper.SearchMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class HotelsService {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+
     @Autowired(required = false)
     HotelsMapper mapper;
 
+    @Autowired(required = false)
+    SearchMapper sMapper;
     /**
      *搜索核心
      * @param location hotelFormerlyName,hotelName ,hotelTranslatedName,address
@@ -20,7 +29,7 @@ public class HotelsService {
      * @param checkOut
      * @return
      */
-    public List<Hotels> findHotels(String location, String checkIn,String checkOut,int num){
+    public List<HotelResult> findHotels(String location, String checkIn,String checkOut,int num){
         String dealInput = "%"+location+"%";
         HotelsExample example = new HotelsExample();
         List<Hotels> hotels = null;
@@ -32,28 +41,38 @@ public class HotelsService {
             //中文只搜索译名
             criteria.andHoteltranslatednameLike(dealInput);
             hotels = mapper.selectByExample(example);
-            return hotels;
         }else if(//按照数据库数据内容，检查关键字
             location.contains("Hotel") || location.contains("SiChuan") || location.contains("Chengdu")){
             //优先搜索酒店名
             criteria.andHotelformerlynameLike(dealInput);
             criteria1.andHotelnameLike(dealInput);
             criteria2.andAddressLike(dealInput);
+            example.or(criteria1);
+            example.or(criteria2);
+            hotels = mapper.selectByExample(example);
         }else {
             criteria.andAddressLike(dealInput);
             criteria1.andHotelformerlynameLike(dealInput);
             criteria2.andHotelnameLike(dealInput);
+            example.or(criteria1);
+            example.or(criteria2);
+            hotels = mapper.selectByExample(example);
         }
-        //执行
-       example.or(criteria1);
-        example.or(criteria2);
 
-
-
-
-
-        hotels = mapper.selectByExample(example);
-        return hotels;
+        Date checkInTime = null;
+        Date checkOutTime = null;
+        try{
+            checkInTime = stringToDate(checkIn);
+            checkOutTime = stringToDate(checkOut);
+        }catch (ParseException e){
+              System.out.println(e.getMessage());
+              return null;
+        }
+        List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels);
+        if(res == null){
+            System.out.println("sql语句没有整对，帮忙调一下");
+        }
+        return res;
     }
 
     /**
@@ -62,5 +81,10 @@ public class HotelsService {
      */
     public boolean isEnglish(String input){
         return input.matches("^[a-zA-Z|\\s]*");
+    }
+
+    public Date stringToDate(String input) throws ParseException {
+        Date date = sdf.parse(input);
+        return date;
     }
 }

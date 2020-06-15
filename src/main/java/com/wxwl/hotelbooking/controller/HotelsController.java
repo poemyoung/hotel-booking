@@ -1,5 +1,6 @@
 package com.wxwl.hotelbooking.controller;
 
+import com.wxwl.hotelbooking.common.domain.HotelResult;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
@@ -37,7 +38,7 @@ public class HotelsController {
                                              @RequestParam(defaultValue = "2020-6-12") String checkInTime,
                                              @RequestParam(defaultValue = "2020-6-13") String checkOutTime,
                                              @RequestParam(defaultValue = "2") int numOfCustomers){
-        List<Hotels> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers);
+        List<HotelResult> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers);
         Result res = new Result();
         if(list == null){
             //内部错误
