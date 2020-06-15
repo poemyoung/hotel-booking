@@ -1,8 +1,5 @@
 package com.wxwl.hotelbooking.common.domain;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class HotelResult {
     private Integer hotelid;
 

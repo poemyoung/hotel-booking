@@ -1,7 +1,6 @@
 package com.wxwl.hotelbooking.controller;
 
 import com.wxwl.hotelbooking.common.domain.HotelResult;
-import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.HotelsService;
@@ -53,5 +52,4 @@ public class HotelsController {
         }
         return res;
     }
-
 }

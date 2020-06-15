@@ -59,8 +59,8 @@ public class HotelsService {
             hotels = mapper.selectByExample(example);
         }
 
-        Date checkInTime = null;
-        Date checkOutTime = null;
+        java.sql.Date checkInTime = null;
+        java.sql.Date checkOutTime = null;
         try{
             checkInTime = stringToDate(checkIn);
             checkOutTime = stringToDate(checkOut);
@@ -83,8 +83,10 @@ public class HotelsService {
         return input.matches("^[a-zA-Z|\\s]*");
     }
 
-    public Date stringToDate(String input) throws ParseException {
-        Date date = sdf.parse(input);
-        return date;
+    public java.sql.Date stringToDate(String input) throws ParseException {
+        Date utilDate = sdf.parse(input);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        return sqlDate;
     }
+
 }

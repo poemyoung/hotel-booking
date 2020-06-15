@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wxwl.hotelbooking.mapper.SearchMapper">
+    <resultMap id="BaseResultMap" type="com.wxwl.hotelbooking.common.domain.HotelResult">
+        <id column="hotelId" jdbcType="INTEGER" property="hotelid" />
+        <result column="chainName" jdbcType="INTEGER" property="chainName" />
+        <result column="brandName" jdbcType="INTEGER" property="brandName" />
+        <result column="hotelName" jdbcType="VARCHAR" property="hotelname" />
+        <result column="hotelFormerlyName" jdbcType="VARCHAR" property="hotelformerlyname" />
+        <result column="hotelTranslatedName" jdbcType="VARCHAR" property="hoteltranslatedname" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="zipcode" jdbcType="INTEGER" property="zipcode" />
+        <result column="starRating" jdbcType="DOUBLE" property="starrating" />
+        <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+        <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+        <result column="checkin" jdbcType="VARCHAR" property="checkin" />
+        <result column="checkout" jdbcType="VARCHAR" property="checkout" />
+        <result column="numberRooms" jdbcType="INTEGER" property="numberrooms" />
+        <result column="numberFloors" jdbcType="INTEGER" property="numberfloors" />
+        <result column="yearOpened" jdbcType="INTEGER" property="yearopened" />
+        <result column="yearRenovated" jdbcType="INTEGER" property="yearrenovated" />
+        <result column="photoOne" jdbcType="VARCHAR" property="photoone" />
+        <result column="photoTwo" jdbcType="VARCHAR" property="phototwo" />
+        <result column="photoThree" jdbcType="VARCHAR" property="photothree" />
+        <result column="photoFour" jdbcType="VARCHAR" property="photofour" />
+        <result column="photoFive" jdbcType="VARCHAR" property="photofive" />
+        <result column="overview" jdbcType="VARCHAR" property="overview" />
+        <result column="minPrice" jdbcType="INTEGER" property="minprice" />
+        <result column="numberOfReviews" jdbcType="INTEGER" property="numberofreviews" />
+        <result column="averageRating" jdbcType="DOUBLE" property="averagerating" />
+    </resultMap>
+
     <sql id="Hotel_Result_List">
         hotelId, chainName, brandName, hotelName, hotelFormerlyName, hotelTranslatedName, address,
     zipcode, starRating, longitude, latitude, checkin, checkout, numberRooms, numberFloors,
@@ -61,6 +90,5 @@
                 </if>
             </where>
     </select>
-
 
 </mapper>
