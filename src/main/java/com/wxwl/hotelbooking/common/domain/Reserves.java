@@ -2,6 +2,7 @@ package com.wxwl.hotelbooking.common.domain;
 
 import java.util.Date;
 
+// 撤回修改 --lyk
 public class Reserves {
     private Integer id;
 
