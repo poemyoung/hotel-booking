@@ -29,7 +29,7 @@
             <if test="hotelList !=null">
                 hotels.hotelId in
                 <foreach collection="hotelList" item="hotel" open="(" close=")" separator=",">
-                    #{hotel.hotelid}
+                    #{hotel.hotelId}
                 </foreach>
             </if>
         </where>
