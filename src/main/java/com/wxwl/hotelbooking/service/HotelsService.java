@@ -18,7 +18,7 @@ import java.util.List;
 public class HotelsService {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 
-    @Autowired
+    @Autowired(required = false)
     HotelsMapper mapper;
 
     @Autowired(required = false)

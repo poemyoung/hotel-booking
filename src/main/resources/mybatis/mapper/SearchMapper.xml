@@ -29,7 +29,7 @@
             <if test="hotelList !=null">
                 hotels.hotelId in
                 <foreach collection="hotelList" item="hotel" open="(" close=")" separator=",">
-                    #{hotel.hotelId}
+                    #{hotel.hotelid}
                 </foreach>
             </if>
         </where>
@@ -56,7 +56,7 @@
                         </if>
                         or
                         <if test="checkOut!=null">
-                            (#{checkIn} &gt;= reserves.checkInAt and #{checkOut} &lt;= reserves.checkOutAt)
+                            (#{checkIn} &gt;= reserves.checkInAt and #{checkIn} &lt;= reserves.checkOutAt)
                         </if>
                     </where>
                     group by
