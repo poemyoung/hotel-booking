@@ -1,23 +1,23 @@
 package com.wxwl.hotelbooking.common.domain;
 
 public class Hotels {
-    private Integer hotelid;
+    private Integer hotelId;
 
-    private Integer chainid;
+    private Integer chainId;
 
-    private Integer brandid;
+    private Integer brandId;
 
-    private String hotelname;
+    private String hotelName;
 
-    private String hotelformerlyname;
+    private String hotelFormerlyName;
 
-    private String hoteltranslatedname;
+    private String hotelTranslatedName;
 
     private String address;
 
     private Integer zipcode;
 
-    private Double starrating;
+    private Double starRating;
 
     private Double longitude;
 
@@ -27,78 +27,78 @@ public class Hotels {
 
     private String checkout;
 
-    private Integer numberrooms;
+    private Integer numberRooms;
 
-    private Integer numberfloors;
+    private Integer numberFloors;
 
-    private Integer yearopened;
+    private Integer yearOpened;
 
-    private Integer yearrenovated;
+    private Integer yearRenovated;
 
-    private String photoone;
+    private String photoOne;
 
-    private String phototwo;
+    private String photoTwo;
 
-    private String photothree;
+    private String photoThree;
 
-    private String photofour;
+    private String photoFour;
 
-    private String photofive;
+    private String photoFive;
 
     private String overview;
 
-    private Integer minprice;
+    private Integer minPrice;
 
-    private Integer numberofreviews;
+    private Integer numberOfReviews;
 
-    private Double averagerating;
+    private Double averageRating;
 
-    public Integer getHotelid() {
-        return hotelid;
+    public Integer getHotelId() {
+        return hotelId;
     }
 
-    public void setHotelid(Integer hotelid) {
-        this.hotelid = hotelid;
+    public void setHotelId(Integer hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public Integer getChainid() {
-        return chainid;
+    public Integer getChainId() {
+        return chainId;
     }
 
-    public void setChainid(Integer chainid) {
-        this.chainid = chainid;
+    public void setChainId(Integer chainId) {
+        this.chainId = chainId;
     }
 
-    public Integer getBrandid() {
-        return brandid;
+    public Integer getBrandId() {
+        return brandId;
     }
 
-    public void setBrandid(Integer brandid) {
-        this.brandid = brandid;
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
     }
 
-    public String getHotelname() {
-        return hotelname;
+    public String getHotelName() {
+        return hotelName;
     }
 
-    public void setHotelname(String hotelname) {
-        this.hotelname = hotelname == null ? null : hotelname.trim();
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName == null ? null : hotelName.trim();
     }
 
-    public String getHotelformerlyname() {
-        return hotelformerlyname;
+    public String getHotelFormerlyName() {
+        return hotelFormerlyName;
     }
 
-    public void setHotelformerlyname(String hotelformerlyname) {
-        this.hotelformerlyname = hotelformerlyname == null ? null : hotelformerlyname.trim();
+    public void setHotelFormerlyName(String hotelFormerlyName) {
+        this.hotelFormerlyName = hotelFormerlyName == null ? null : hotelFormerlyName.trim();
     }
 
-    public String getHoteltranslatedname() {
-        return hoteltranslatedname;
+    public String getHotelTranslatedName() {
+        return hotelTranslatedName;
     }
 
-    public void setHoteltranslatedname(String hoteltranslatedname) {
-        this.hoteltranslatedname = hoteltranslatedname == null ? null : hoteltranslatedname.trim();
+    public void setHotelTranslatedName(String hotelTranslatedName) {
+        this.hotelTranslatedName = hotelTranslatedName == null ? null : hotelTranslatedName.trim();
     }
 
     public String getAddress() {
@@ -117,12 +117,12 @@ public class Hotels {
         this.zipcode = zipcode;
     }
 
-    public Double getStarrating() {
-        return starrating;
+    public Double getStarRating() {
+        return starRating;
     }
 
-    public void setStarrating(Double starrating) {
-        this.starrating = starrating;
+    public void setStarRating(Double starRating) {
+        this.starRating = starRating;
     }
 
     public Double getLongitude() {
@@ -157,76 +157,76 @@ public class Hotels {
         this.checkout = checkout == null ? null : checkout.trim();
     }
 
-    public Integer getNumberrooms() {
-        return numberrooms;
+    public Integer getNumberRooms() {
+        return numberRooms;
     }
 
-    public void setNumberrooms(Integer numberrooms) {
-        this.numberrooms = numberrooms;
+    public void setNumberRooms(Integer numberRooms) {
+        this.numberRooms = numberRooms;
     }
 
-    public Integer getNumberfloors() {
-        return numberfloors;
+    public Integer getNumberFloors() {
+        return numberFloors;
     }
 
-    public void setNumberfloors(Integer numberfloors) {
-        this.numberfloors = numberfloors;
+    public void setNumberFloors(Integer numberFloors) {
+        this.numberFloors = numberFloors;
     }
 
-    public Integer getYearopened() {
-        return yearopened;
+    public Integer getYearOpened() {
+        return yearOpened;
     }
 
-    public void setYearopened(Integer yearopened) {
-        this.yearopened = yearopened;
+    public void setYearOpened(Integer yearOpened) {
+        this.yearOpened = yearOpened;
     }
 
-    public Integer getYearrenovated() {
-        return yearrenovated;
+    public Integer getYearRenovated() {
+        return yearRenovated;
     }
 
-    public void setYearrenovated(Integer yearrenovated) {
-        this.yearrenovated = yearrenovated;
+    public void setYearRenovated(Integer yearRenovated) {
+        this.yearRenovated = yearRenovated;
     }
 
-    public String getPhotoone() {
-        return photoone;
+    public String getPhotoOne() {
+        return photoOne;
     }
 
-    public void setPhotoone(String photoone) {
-        this.photoone = photoone == null ? null : photoone.trim();
+    public void setPhotoOne(String photoOne) {
+        this.photoOne = photoOne == null ? null : photoOne.trim();
     }
 
-    public String getPhototwo() {
-        return phototwo;
+    public String getPhotoTwo() {
+        return photoTwo;
     }
 
-    public void setPhototwo(String phototwo) {
-        this.phototwo = phototwo == null ? null : phototwo.trim();
+    public void setPhotoTwo(String photoTwo) {
+        this.photoTwo = photoTwo == null ? null : photoTwo.trim();
     }
 
-    public String getPhotothree() {
-        return photothree;
+    public String getPhotoThree() {
+        return photoThree;
     }
 
-    public void setPhotothree(String photothree) {
-        this.photothree = photothree == null ? null : photothree.trim();
+    public void setPhotoThree(String photoThree) {
+        this.photoThree = photoThree == null ? null : photoThree.trim();
     }
 
-    public String getPhotofour() {
-        return photofour;
+    public String getPhotoFour() {
+        return photoFour;
     }
 
-    public void setPhotofour(String photofour) {
-        this.photofour = photofour == null ? null : photofour.trim();
+    public void setPhotoFour(String photoFour) {
+        this.photoFour = photoFour == null ? null : photoFour.trim();
     }
 
-    public String getPhotofive() {
-        return photofive;
+    public String getPhotoFive() {
+        return photoFive;
     }
 
-    public void setPhotofive(String photofive) {
-        this.photofive = photofive == null ? null : photofive.trim();
+    public void setPhotoFive(String photoFive) {
+        this.photoFive = photoFive == null ? null : photoFive.trim();
     }
 
     public String getOverview() {
@@ -237,27 +237,27 @@ public class Hotels {
         this.overview = overview == null ? null : overview.trim();
     }
 
-    public Integer getMinprice() {
-        return minprice;
+    public Integer getMinPrice() {
+        return minPrice;
     }
 
-    public void setMinprice(Integer minprice) {
-        this.minprice = minprice;
+    public void setMinPrice(Integer minPrice) {
+        this.minPrice = minPrice;
     }
 
-    public Integer getNumberofreviews() {
-        return numberofreviews;
+    public Integer getNumberOfReviews() {
+        return numberOfReviews;
     }
 
-    public void setNumberofreviews(Integer numberofreviews) {
-        this.numberofreviews = numberofreviews;
+    public void setNumberOfReviews(Integer numberOfReviews) {
+        this.numberOfReviews = numberOfReviews;
     }
 
-    public Double getAveragerating() {
-        return averagerating;
+    public Double getAverageRating() {
+        return averageRating;
     }
 
-    public void setAveragerating(Double averagerating) {
-        this.averagerating = averagerating;
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
 }
