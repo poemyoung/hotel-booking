@@ -1,106 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wxwl.hotelbooking.mapper.SearchMapper">
-    <resultMap id="BaseResultMap" type="com.wxwl.hotelbooking.common.domain.HotelResult">
-        <id column="hotelId" jdbcType="INTEGER" property="hotelid" />
-        <result column="chainName" jdbcType="VARCHAR" property="chainname" />
-        <result column="brandName" jdbcType="VARCHAR" property="brandname" />
-        <result column="hotelName" jdbcType="VARCHAR" property="hotelname" />
-        <result column="hotelFormerlyName" jdbcType="VARCHAR" property="hotelformerlyname" />
-        <result column="hotelTranslatedName" jdbcType="VARCHAR" property="hoteltranslatedname" />
-        <result column="address" jdbcType="VARCHAR" property="address" />
-        <result column="zipcode" jdbcType="INTEGER" property="zipcode" />
-        <result column="starRating" jdbcType="DOUBLE" property="starrating" />
-        <result column="longitude" jdbcType="DOUBLE" property="longitude" />
-        <result column="latitude" jdbcType="DOUBLE" property="latitude" />
-        <result column="checkin" jdbcType="VARCHAR" property="checkin" />
-        <result column="checkout" jdbcType="VARCHAR" property="checkout" />
-        <result column="numberRooms" jdbcType="INTEGER" property="numberrooms" />
-        <result column="numberFloors" jdbcType="INTEGER" property="numberfloors" />
-        <result column="yearOpened" jdbcType="INTEGER" property="yearopened" />
-        <result column="yearRenovated" jdbcType="INTEGER" property="yearrenovated" />
-        <result column="photoOne" jdbcType="VARCHAR" property="photoone" />
-        <result column="photoTwo" jdbcType="VARCHAR" property="phototwo" />
-        <result column="photoThree" jdbcType="VARCHAR" property="photothree" />
-        <result column="photoFour" jdbcType="VARCHAR" property="photofour" />
-        <result column="photoFive" jdbcType="VARCHAR" property="photofive" />
-        <result column="overview" jdbcType="VARCHAR" property="overview" />
-        <result column="minPrice" jdbcType="INTEGER" property="minprice" />
-        <result column="numberOfReviews" jdbcType="INTEGER" property="numberofreviews" />
-        <result column="averageRating" jdbcType="DOUBLE" property="averagerating" />
-    </resultMap>
-
     <sql id="Hotel_Result_List">
-        hotels.hotelId, chainName, brandName, hotelName, hotelFormerlyName, hotelTranslatedName, address,
+        ta.hotelId, chainName, brandName, hotelName, hotelFormerlyName, hotelTranslatedName, address,
     zipcode, starRating, longitude, latitude, checkin, checkout, numberRooms, numberFloors,
     yearOpened, yearRenovated, photoOne, photoTwo, photoThree, photoFour, photoFive,
     overview, minPrice, numberOfReviews, averageRating
     </sql>
 
-    <select id="selectChainId">
+    <sql id="Hotels_List">
+         hotels.hotelId, chainId, brandId, hotelName, hotelFormerlyName, hotelTranslatedName, address,
+    zipcode, starRating, longitude, latitude, checkin, checkout, numberRooms, numberFloors,
+    yearOpened, yearRenovated, photoOne, photoTwo, photoThree, photoFour, photoFive,
+    overview, minPrice, numberOfReviews, averageRating
+    </sql>
+
+
+    <select id="searchByConditions" resultType="com.wxwl.hotelbooking.common.domain.HotelResult">
         select
         <include refid="Hotel_Result_List"></include>
         from
-        hotels left  join chains
-        on hotels.chainId = chains.chainId
-        left join  brands
-        on hotels.brandId = brands.brandId
-        left join rooms
-        on hotels.hotelId = rooms.hotelId
+        (
+        select
+        <include refid="Hotels_List"></include>
+        from
+        hotels
+        <where>
+            <if test="hotelList !=null">
+                hotels.hotelId in
+                <foreach collection="hotelList" item="hotel" open="(" close=")" separator=",">
+                    #{hotel.hotelid}
+                </foreach>
+            </if>
+        </where>
+        ) ta
+        left join chains
+        on chains.chainId=ta.chainId
+        left join brands
+        on brands.brandId=ta.brandId
+        natural join
+        (
+            select hotelId from
+            (
+                select rooms.id,rooms.hotelId,
+                if((rooms.count-roomsOccupied) * capacity IS NULL,
+                rooms.count * rooms.capacity,(rooms.count-roomsOccupied) * capacity)
+                as roomCap
+                from
+                rooms left join
+                (
+                    select reserves.roomId,count(reserves.id) as roomsOccupied from reserves
+                    <where>
+                        <if test="checkIn!=null">
+                            (#{checkIn} &lt; reserves.checkInAt and #{checkOut} &gt; reserves.checkInAt)
+                        </if>
+                        or
+                        <if test="checkOut!=null">
+                            (#{checkIn} &gt; reserves.checkInAt and #{checkOut} &lt; reserves.checkOutAt)
+                        </if>
+                    </where>
+                    group by
+                     reserves.roomId
+                ) tb
+                on rooms.id = tb.roomId
+            )  t group by t.hotelId having SUM(roomCap) > #{num}
+        ) tc;
     </select>
-
-<!--    <sql id="Time_Right">-->
-<!--        select reserve.roomId,count(reserve.id) as roomsOccupied-->
-<!--        from reserve-->
-<!--        <where>-->
-<!--            <if test="checkIn != null">-->
-<!--                (reserve.checkInAt &gt; #{checkIn}-->
-<!--                and reserve.checInAt &lt; #{checkOut})-->
-<!--            </if>-->
-<!--            or-->
-<!--            <if test="checkOut != null">-->
-<!--                (reserve.checkOutAt &gt; #{checkIn}-->
-<!--                and reserve.checOutAt &lt; #{checkOut})-->
-<!--            </if>-->
-<!--        </where>-->
-<!--        group by reserve.roomId-->
-<!--    </sql>-->
-
-<!--    <sql id="Rooms_Exists">-->
-<!--        select rooms.id,rooms.hotelId,((rooms.count-roomsOccupied)*roomsCapacity) as roomsCap-->
-<!--        from rooms-->
-<!--        left join-->
-<!--        <include refid="Time_Right"></include>-->
-<!--        rav-->
-<!--        where rooms.count - rav.roomsOccupied > 0-->
-<!--    </sql>-->
-
-
-
-<!--    <select id="selectChainId" resultType="HotelResult">-->
-<!--            select-->
-<!--            <include refid="Hotel_Result_List"></include>-->
-<!--            FROM-->
-<!--            (select hotelId-->
-<!--            from hotels-->
-<!--            where hotelId in-->
-<!--            <foreach collection="hotelList" index="index" item="hotel">-->
-<!--                #{hotel.hotelId}-->
-<!--            </foreach>-->
-<!--            ) rh-->
-<!--            left  join-->
-<!--            <include refid="Rooms_Exists"></include>-->
-<!--            rr-->
-<!--            on rh.id = rr.id-->
-<!--            left join chains-->
-<!--            on chains.chainId = rh.chainId-->
-<!--            left join brands-->
-<!--            on brands.brandId = rh.brandId-->
-<!--            <where>-->
-<!--                <if test="num > 0">-->
-<!--                    roomsCap > num-->
-<!--                </if>-->
-<!--            </where>-->
-<!--    </select>-->
-
 </mapper>

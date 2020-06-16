@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,10 +69,11 @@ public class HotelsService {
               System.out.println(e.getMessage());
               return null;
         }
-        List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels);
-        if(res == null){
-            System.out.println("sql语句没有整对，帮忙调一下");
+        //检查时间是否正确
+        if(checkInTime.compareTo(checkOutTime) >= 0){
+            return new ArrayList<>();
         }
+        List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels);
         return res;
     }
 
@@ -89,8 +91,4 @@ public class HotelsService {
         return sqlDate;
     }
 
-    public static void main(String[] args) throws ParseException {
-        HotelsService a = new HotelsService();
-       System.out.println(a.stringToDate("2020-05-20").getTime());
-    }
 }

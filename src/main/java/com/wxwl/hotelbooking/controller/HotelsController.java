@@ -38,12 +38,11 @@ public class HotelsController {
                                              @RequestParam(defaultValue = "2020-6-13") String checkOutTime,
                                              @RequestParam(defaultValue = "2") int numOfCustomers){
         List<HotelResult> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers);
-        Result res = new Result();
+        Result res ;
         if(list == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
             res.setMsg("日期格式错误！");
-
         }else if(list.size() == 0){
             res = Result.failure(ResultCode.RESULE_DATA_NONE);
             res.setMsg("数据未找到");
