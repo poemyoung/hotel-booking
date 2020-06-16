@@ -52,18 +52,18 @@
                     select reserves.roomId,count(reserves.id) as roomsOccupied from reserves
                     <where>
                         <if test="checkIn!=null">
-                            (#{checkIn} &lt; reserves.checkInAt and #{checkOut} &gt; reserves.checkInAt)
+                            (#{checkIn} &lt;= reserves.checkInAt and #{checkOut} &gt;= reserves.checkInAt)
                         </if>
                         or
                         <if test="checkOut!=null">
-                            (#{checkIn} &gt; reserves.checkInAt and #{checkOut} &lt; reserves.checkOutAt)
+                            (#{checkIn} &gt;= reserves.checkInAt and #{checkOut} &lt;= reserves.checkOutAt)
                         </if>
                     </where>
                     group by
                      reserves.roomId
                 ) tb
                 on rooms.id = tb.roomId
-            )  t group by t.hotelId having SUM(roomCap) > #{num}
+            )  t group by t.hotelId having SUM(roomCap) >= #{num}
         ) tc;
     </select>
 </mapper>
