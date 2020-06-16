@@ -72,6 +72,11 @@ public class HotelsService {
         //检查时间是否正确
         if(checkInTime.compareTo(checkOutTime) >= 0){
             return new ArrayList<>();
+        }else if(hotels == null){
+            //检查酒店列表
+            return  new ArrayList<>();
+        }else if(hotels.size() == 0){
+            return new ArrayList<>();
         }
         List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels);
         return res;
@@ -90,5 +95,4 @@ public class HotelsService {
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         return sqlDate;
     }
-
 }
