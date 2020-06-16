@@ -1,63 +1,63 @@
 package com.wxwl.hotelbooking.common.domain;
 
 public class HotelResult {
-    private Integer hotelId;
+    private Integer hotelid;
 
-    private String chainName;
+    private String chainname;
 
-    private String brandName;
+    private String brandname;
 
-    private String hotelName;
+    private String hotelname;
 
-    private String hotelFormerlyName;
+    private String hotelformerlyname;
 
-    public Integer getHotelId() {
-        return hotelId;
+    public Integer getHotelid() {
+        return hotelid;
     }
 
-    public void setHotelId(Integer hotelId) {
-        this.hotelId = hotelId;
+    public void setHotelid(Integer hotelid) {
+        this.hotelid = hotelid;
     }
 
     public String getChainname() {
-        return chainName;
+        return chainname;
     }
 
     public void setChainname(String chainname) {
-        this.chainName = chainname;
+        this.chainname = chainname;
     }
 
     public String getBrandname() {
-        return brandName;
+        return brandname;
     }
 
     public void setBrandname(String brandname) {
-        this.brandName = brandname;
+        this.brandname = brandname;
     }
 
 
     public String getHotelname() {
-        return hotelName;
+        return hotelname;
     }
 
     public void setHotelname(String hotelname) {
-        this.hotelName = hotelname;
+        this.hotelname = hotelname;
     }
 
     public String getHotelformerlyname() {
-        return hotelFormerlyName;
+        return hotelformerlyname;
     }
 
     public void setHotelformerlyname(String hotelformerlyname) {
-        this.hotelFormerlyName = hotelformerlyname;
+        this.hotelformerlyname = hotelformerlyname;
     }
 
     public String getHoteltranslatedname() {
-        return hotelTranslatedName;
+        return hoteltranslatedname;
     }
 
     public void setHoteltranslatedname(String hoteltranslatedname) {
-        this.hotelTranslatedName = hoteltranslatedname;
+        this.hoteltranslatedname = hoteltranslatedname;
     }
 
     public String getAddress() {
@@ -77,11 +77,11 @@ public class HotelResult {
     }
 
     public Double getStarrating() {
-        return starRating;
+        return starrating;
     }
 
     public void setStarrating(Double starrating) {
-        this.starRating = starrating;
+        this.starrating = starrating;
     }
 
     public Double getLongitude() {
@@ -117,75 +117,75 @@ public class HotelResult {
     }
 
     public Integer getNumberrooms() {
-        return numberRooms;
+        return numberrooms;
     }
 
     public void setNumberrooms(Integer numberrooms) {
-        this.numberRooms = numberrooms;
+        this.numberrooms = numberrooms;
     }
 
     public Integer getNumberfloors() {
-        return numberFloors;
+        return numberfloors;
     }
 
     public void setNumberfloors(Integer numberfloors) {
-        this.numberFloors = numberfloors;
+        this.numberfloors = numberfloors;
     }
 
     public Integer getYearopened() {
-        return yearOpened;
+        return yearopened;
     }
 
     public void setYearopened(Integer yearopened) {
-        this.yearOpened = yearopened;
+        this.yearopened = yearopened;
     }
 
     public Integer getYearrenovated() {
-        return yearRenovated;
+        return yearrenovated;
     }
 
     public void setYearrenovated(Integer yearrenovated) {
-        this.yearRenovated = yearrenovated;
+        this.yearrenovated = yearrenovated;
     }
 
     public String getPhotoone() {
-        return photoOne;
+        return photoone;
     }
 
     public void setPhotoone(String photoone) {
-        this.photoOne = photoone;
+        this.photoone = photoone;
     }
 
     public String getPhototwo() {
-        return photoTwo;
+        return phototwo;
     }
 
     public void setPhototwo(String phototwo) {
-        this.photoTwo = phototwo;
+        this.phototwo = phototwo;
     }
 
     public String getPhotothree() {
-        return photoThree;
+        return photothree;
     }
 
     public void setPhotothree(String photothree) {
-        this.photoThree = photothree;
+        this.photothree = photothree;
     }
 
     public String getPhotofour() {
-        return photoFour;
+        return photofour;
     }
 
     public void setPhotofour(String photofour) {
-        this.photoFour = photofour;
+        this.photofour = photofour;
     }
 
     public String getPhotofive() {
-        return photoFive;
+        return photofive;
     }
 
     public void setPhotofive(String photofive) {
-        this.photoFive = photofive;
+        this.photofive = photofive;
     }
 
     public String getOverview() {
@@ -197,36 +197,36 @@ public class HotelResult {
     }
 
     public Integer getMinprice() {
-        return minPrice;
+        return minprice;
     }
 
     public void setMinprice(Integer minprice) {
-        this.minPrice = minprice;
+        this.minprice = minprice;
     }
 
-    public Integer getNumberOfReviews() {
-        return numberOfReviews;
+    public Integer getNumberofreviews() {
+        return numberofreviews;
     }
 
-    public void setNumberOfReviews(Integer numberOfReviews) {
-        this.numberOfReviews = numberOfReviews;
+    public void setNumberofreviews(Integer numberofreviews) {
+        this.numberofreviews = numberofreviews;
     }
 
     public Double getAveragerating() {
-        return averageRating;
+        return averagerating;
     }
 
     public void setAveragerating(Double averagerating) {
-        this.averageRating = averagerating;
+        this.averagerating = averagerating;
     }
 
-    private String hotelTranslatedName;
+    private String hoteltranslatedname;
 
     private String address;
 
     private Integer zipcode;
 
-    private Double starRating;
+    private Double starrating;
 
     private Double longitude;
 
@@ -236,30 +236,30 @@ public class HotelResult {
 
     private String checkout;
 
-    private Integer numberRooms;
+    private Integer numberrooms;
 
-    private Integer numberFloors;
+    private Integer numberfloors;
 
-    private Integer yearOpened;
+    private Integer yearopened;
 
-    private Integer yearRenovated;
+    private Integer yearrenovated;
 
-    private String photoOne;
+    private String photoone;
 
-    private String photoTwo;
+    private String phototwo;
 
-    private String photoThree;
+    private String photothree;
 
-    private String photoFour;
+    private String photofour;
 
-    private String photoFive;
+    private String photofive;
 
     private String overview;
 
-    private Integer minPrice;
+    private Integer minprice;
 
-    private Integer numberOfReviews;
+    private Integer numberofreviews;
 
-    private Double averageRating;
+    private Double averagerating;
 
 }

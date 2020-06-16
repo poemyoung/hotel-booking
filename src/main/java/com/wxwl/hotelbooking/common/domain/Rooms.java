@@ -13,9 +13,9 @@ public class Rooms {
 
     private Integer count;
 
-    private String createdAt;
+    private String createdat;
 
-    private Integer hotelId;
+    private Integer hotelid;
 
     public Integer getId() {
         return id;
@@ -66,18 +66,18 @@ public class Rooms {
     }
 
     public String getCreatedat() {
-        return createdAt;
+        return createdat;
     }
 
     public void setCreatedat(String createdat) {
-        this.createdAt = createdat == null ? null : createdat.trim();
+        this.createdat = createdat == null ? null : createdat.trim();
     }
 
     public Integer getHotelid() {
-        return hotelId;
+        return hotelid;
     }
 
     public void setHotelid(Integer hotelid) {
-        this.hotelId = hotelid;
+        this.hotelid = hotelid;
     }
 }

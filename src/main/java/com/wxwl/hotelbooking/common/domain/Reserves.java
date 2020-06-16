@@ -5,21 +5,21 @@ import java.util.Date;
 public class Reserves {
     private Integer id;
 
-    private Integer hotelId;
+    private Integer hotelid;
 
-    private Integer roomId;
+    private Integer roomid;
 
-    private String createAt;
+    private String createat;
 
-    private String userName;
+    private String username;
 
-    private String userPhone;
+    private String userphone;
 
-    private String userEmail;
+    private String useremail;
 
-    private Date checkInAt;
+    private Date checkinat;
 
-    private Date checkOutAt;
+    private Date checkoutat;
 
     private String pay;
 
@@ -34,67 +34,67 @@ public class Reserves {
     }
 
     public Integer getHotelid() {
-        return hotelId;
+        return hotelid;
     }
 
     public void setHotelid(Integer hotelid) {
-        this.hotelId = hotelid;
+        this.hotelid = hotelid;
     }
 
     public Integer getRoomid() {
-        return roomId;
+        return roomid;
     }
 
     public void setRoomid(Integer roomid) {
-        this.roomId = roomid;
+        this.roomid = roomid;
     }
 
     public String getCreateat() {
-        return createAt;
+        return createat;
     }
 
     public void setCreateat(String createat) {
-        this.createAt = createat == null ? null : createat.trim();
+        this.createat = createat == null ? null : createat.trim();
     }
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     public void setUsername(String username) {
-        this.userName = username == null ? null : username.trim();
+        this.username = username == null ? null : username.trim();
     }
 
     public String getUserphone() {
-        return userPhone;
+        return userphone;
     }
 
     public void setUserphone(String userphone) {
-        this.userPhone = userphone == null ? null : userphone.trim();
+        this.userphone = userphone == null ? null : userphone.trim();
     }
 
     public String getUseremail() {
-        return userEmail;
+        return useremail;
     }
 
     public void setUseremail(String useremail) {
-        this.userEmail = useremail == null ? null : useremail.trim();
+        this.useremail = useremail == null ? null : useremail.trim();
     }
 
     public Date getCheckinat() {
-        return checkInAt;
+        return checkinat;
     }
 
     public void setCheckinat(Date checkinat) {
-        this.checkInAt = checkinat;
+        this.checkinat = checkinat;
     }
 
     public Date getCheckoutat() {
-        return checkOutAt;
+        return checkoutat;
     }
 
     public void setCheckoutat(Date checkoutat) {
-        this.checkOutAt = checkoutat;
+        this.checkoutat = checkoutat;
     }
 
     public String getPay() {
