@@ -9,10 +9,7 @@ import com.wxwl.hotelbooking.service.HotelsService;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -70,9 +67,9 @@ public class HotelsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/accommodations/id")
+    @GetMapping("/accommodations/{id}")
     // /accommodations/id?hotelId=1297&checkInTime=2020-06-14&checkOutTime=2020-06-21
-    public Object showHotel(@RequestParam(defaultValue = "1297") int hotelId,
+    public Object showHotel(@PathVariable("id") int hotelId,
                             @RequestParam(defaultValue = "2020-6-12") String checkInTime,
                             @RequestParam(defaultValue = "2020-6-13") String checkOutTime){
         Result res;
