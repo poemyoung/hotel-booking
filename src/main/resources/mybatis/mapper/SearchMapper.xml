@@ -56,7 +56,7 @@
                         </if>
                         or
                         <if test="checkOut!=null">
-                            (#{checkIn} &gt;= reserves.checkInAt and #{checkOut} &lt;= reserves.checkOutAt)
+                            (#{checkIn} &gt;= reserves.checkInAt and #{checkIn} &lt;= reserves.checkOutAt)
                         </if>
                     </where>
                     group by
@@ -64,6 +64,10 @@
                 ) tb
                 on rooms.id = tb.roomId
             )  t group by t.hotelId having SUM(roomCap) >= #{num}
-        ) tc;
+        ) tc
+            <if test="page >= 0 and pageSize >0">
+                limit  #{page} , #{pageSize}
+            </if>
+        ;
     </select>
 </mapper>

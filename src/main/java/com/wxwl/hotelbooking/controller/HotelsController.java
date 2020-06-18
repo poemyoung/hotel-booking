@@ -27,6 +27,8 @@ public class HotelsController {
             @ApiImplicitParam(paramType = "query",name = "checkInTime",dataType = "String",required = true,value = "入住时间",defaultValue = "2020-6-12"),
             @ApiImplicitParam(paramType = "query",name="checkOutTime",dataType = "String",required = true,value = "离店时间",defaultValue = "2020-6-13"),
             @ApiImplicitParam(paramType = "query",name="numOfCustomers",dataType = "Integer",required = true,value = "入住人数",defaultValue = "2"),
+            @ApiImplicitParam(paramType = "query",name="pageNo",dataType = "Integer",required = true,value = "页号",defaultValue = "1"),
+            @ApiImplicitParam(paramType = "query",name="pageSize",dataType = "Integer",required = true,value = "每页条数",defaultValue = "-1")
     })
     @ApiResponses({
             @ApiResponse(code = 200,message = "success"),
@@ -37,8 +39,10 @@ public class HotelsController {
     public Result findHotels(@RequestParam(defaultValue = "Chengdu") String location,
                                              @RequestParam(defaultValue = "2020-6-12") String checkInTime,
                                              @RequestParam(defaultValue = "2020-6-13") String checkOutTime,
-                                             @RequestParam(defaultValue = "2") int numOfCustomers){
-        List<HotelResult> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers);
+                                             @RequestParam(defaultValue = "2") int numOfCustomers,
+                                             @RequestParam(defaultValue = "1") int pageNo,
+                                             @RequestParam(defaultValue = "-1") int pageSize){
+        List<HotelResult> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers,pageNo,pageSize);
         Result res ;
         if(list == null){
             //内部错误

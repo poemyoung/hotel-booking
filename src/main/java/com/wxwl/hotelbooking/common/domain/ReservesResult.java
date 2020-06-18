@@ -9,7 +9,7 @@ public class ReservesResult {
 
     private Integer roomid;
 
-    private String createat;
+    private Date createat;
 
     private String username;
 
@@ -59,12 +59,12 @@ public class ReservesResult {
         this.roomid = roomid;
     }
 
-    public String getCreateat() {
+    public Date getCreateat() {
         return createat;
     }
 
-    public void setCreateat(String createat) {
-        this.createat = createat == null ? null : createat.trim();
+    public void setCreateat(Date createat) {
+        this.createat = createat == null ? null : createat;
     }
 
     public String getUsername() {
@@ -123,7 +123,7 @@ public class ReservesResult {
         this.price = price;
     }
 
-    public ReservesResult(Integer id, Integer hotelid, Integer roomid, String createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, String pay, Long price, int numOfCustomers) {
+    public ReservesResult(Integer id, Integer hotelid, Integer roomid, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, String pay, Long price, int numOfCustomers) {
         this.id = id;
         this.hotelid = hotelid;
         this.roomid = roomid;

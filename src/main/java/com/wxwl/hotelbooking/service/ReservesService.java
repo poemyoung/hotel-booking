@@ -5,6 +5,7 @@ import com.wxwl.hotelbooking.mapper.HotelsMapper;
 import com.wxwl.hotelbooking.mapper.ReservesMapper;
 import com.wxwl.hotelbooking.mapper.RoomsMapper;
 import com.wxwl.hotelbooking.mapper.SearchMapper;
+import com.wxwl.hotelbooking.common.domain.Hotels;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,9 @@ public class ReservesService {
     @Autowired(required = false)
     HotelsMapper hotelsMapper;
 
+    @Autowired(required = false)
+    SearchMapper searchMapper;
+
     public ReservesResult addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkIn,String checkOut,Integer numOfCustomers,String payway){
         // 检查hotelId
         if( hotelsMapper.selectByPrimaryKey(hotelId) == null)
@@ -41,9 +45,6 @@ public class ReservesService {
         java.sql.Date checkOutTime = null;
         try{
             checkInTime = stringToDate(checkIn);
-            // test
-            System.out.println(checkIn+" "+checkInTime);
-
             checkOutTime = stringToDate(checkOut);
         }catch (ParseException e){
             System.out.println(e.getMessage());
@@ -52,12 +53,18 @@ public class ReservesService {
 
         // 支付方式: String -> enum(PayWay)
         PayWay pay = getEnumFromString(PayWay.class,payway);
-        System.out.println(pay);
+        //System.out.println(pay);
 
         // 检查roomId
         if(roomsMapper.selectByPrimaryKey(roomId) == null)
         {
             System.out.println("roomId错误！");
+            return new ReservesResult();
+        }
+        else if(!roomsMapper.selectByPrimaryKey(roomId).getHotelid().equals(hotelId))
+        {
+            //System.out.println(roomsMapper.selectByPrimaryKey(roomId).getHotelid() + " " + hotelId);
+            System.out.println("该房间不在指定酒店内！");
             return new ReservesResult();
         }
         // 检查room是否可容纳numsOfCustomer个顾客
@@ -67,19 +74,34 @@ public class ReservesService {
             return  new ReservesResult();
         }
 
+        List<Hotels> hotelsList = new ArrayList<>();
+        hotelsList.add(hotelsMapper.selectByPrimaryKey(hotelId));
+
         // 检查room在入住-退房时间段是否有剩余，未解决
+        /*if(searchMapper.searchByConditions(checkInTime,checkOutTime,1,hotelsList,1,1).isEmpty()){
+            System.out.println("房间剩余数目不足！");
+            return new ReservesResult();
+        }*/
+        if(!ExistEmptyRooms(hotelId,roomId,checkInTime,checkOutTime))
+        {
+            System.out.println("房间剩余数目不足！");
+            return new ReservesResult();
+        }
 
         // 获取房间price
         long price = roomsMapper.selectByPrimaryKey(roomId).getPrice();
 
-        // 获取creatAt,未解决
-        Reserves reserve = new Reserves(0,hotelId,roomId,"1999-1-10 20:20:20",userName,userPhone,userEmail,checkInTime,checkOutTime,pay,price);
+        // 获取creatAt为当前系统时间
+        Date createAt= new Date();
+        Reserves reserve = new Reserves(0,hotelId,roomId,createAt,userName,userPhone,userEmail,checkInTime,checkOutTime,pay,price);
 
         // insert新订单记录
         reservesMapper.insert(reserve);
 
         // 返回自增id
         int id = reserve.getId();
+        createAt = reserve.getCreateat();
+        //System.out.println(createAt);
 
         // 检查时间是否正确
         if(checkInTime.compareTo(checkOutTime) >= 0){
@@ -89,7 +111,7 @@ public class ReservesService {
             System.out.println("返回自增id失败！");
             return  new ReservesResult();
         }
-        ReservesResult res = new ReservesResult(id,hotelId,roomId,"1999-1-10 20:20:20",userName,userPhone,userEmail,checkInTime,checkOutTime,payway,price,numOfCustomers);
+        ReservesResult res = new ReservesResult(id,hotelId,roomId,createAt,userName,userPhone,userEmail,checkInTime,checkOutTime,payway,price,numOfCustomers);
         return res;
     }
 
@@ -115,5 +137,15 @@ public class ReservesService {
             }
         }
         return null;
+    }
+
+    public boolean ExistEmptyRooms(int hotelId,int roomId,Date checkInAt,Date checkOutAt)
+    {
+        ReservesExample reservesExample = new ReservesExample();
+        reservesExample.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt);
+        List<Reserves> reservesList = reservesMapper.selectByExample(reservesExample);
+        if(reservesList.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
+            return true;
+        return false;
     }
 }

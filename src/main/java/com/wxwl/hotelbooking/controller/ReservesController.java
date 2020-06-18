@@ -33,7 +33,7 @@ public class ReservesController {
 
         reservesResult = reservesService.addReserve(hotelId,roomId,userName,userPhone,userEmail,checkInTime,checkOutTime,numOfCustomers,pay);
         // Result result = null;
-        System.out.println(hotelId);
+        //System.out.println(hotelId);
         Result res;
         if(reservesResult == null){
             //内部错误
@@ -45,7 +45,9 @@ public class ReservesController {
         }
         else {
             res = Result.success(reservesResult);
+            System.out.println("订单添加成功！");
         }
+
 
         return res;
         //return userName + " " + numOfCustomers + " " + userPhone + " " +checkInTime + " " +checkOutTime;

@@ -25,7 +25,7 @@ CREATE TABLE `reserves` (
   `id` int NOT NULL AUTO_INCREMENT,
   `hotelId` int DEFAULT NULL,
   `roomId` int NOT NULL,
-  `createAt` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `createAt` date not null, -- varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `userName` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `userPhone` varchar(255) NOT NULL,
   `userEmail` varchar(255) DEFAULT NULL,
