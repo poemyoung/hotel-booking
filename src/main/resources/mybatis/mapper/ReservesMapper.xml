@@ -106,15 +106,16 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Reserves">
+  <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Reserves" useGeneratedKeys="true" keyProperty="id">
     insert into reserves (id, hotelId, roomId, 
       createAt, userName, userPhone, 
       userEmail, checkInAt, checkOutAt, 
       pay, price)
     values (#{id,jdbcType=INTEGER}, #{hotelid,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, 
       #{createat,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, 
-      #{useremail,jdbcType=VARCHAR}, #{checkinat,jdbcType=DATE}, #{checkoutat,jdbcType=DATE}, 
-      #{pay,jdbcType=CHAR}, #{price,jdbcType=DECIMAL})
+      #{useremail,jdbcType=VARCHAR}, #{checkinat,jdbcType=DATE}, #{checkoutat,jdbcType=DATE},
+      -- pay: CHAR -> VARCHAR
+      #{pay,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wxwl.hotelbooking.common.domain.Reserves">
     insert into reserves

@@ -56,7 +56,7 @@
                         </if>
                         or
                         <if test="checkOut!=null">
-                            (#{checkIn} &gt;= reserves.checkInAt and #{checkOut} &lt;= reserves.checkOutAt)
+                            (#{checkIn} &gt;= reserves.checkInAt and #{checkIn} &lt;= reserves.checkOutAt)
                         </if>
                     </where>
                     group by
@@ -64,6 +64,35 @@
                 ) tb
                 on rooms.id = tb.roomId
             )  t group by t.hotelId having SUM(roomCap) >= #{num}
-        ) tc;
+        ) tc
+            <if test="page >= 0 and pageSize >0">
+                limit  #{page} , #{pageSize}
+            </if>
+        ;
+    </select>
+
+    <select id="findRooms" resultType="com.wxwl.hotelbooking.common.domain.Rooms">
+        select id,name,price,capacity,intro,count,createdAt,hotelId
+        from
+        (
+            select r0.id AS remainderId, (r0.count - ifnull(occupied,0)) * r0.capacity AS remainderCap
+            from (
+                select rooms.id, count(reserves.id) AS occupied
+                from rooms LEFT JOIN reserves on reserves.roomId = rooms.id
+                where (( #{checkIn}>=reserves.checkInAt and reserves.checkOutAt >= #{checkIn}) OR
+                (reserves.checkInAt >= #{checkIn} and #{checkOut} &lt;= reserves.checkOutAt))
+                group by reserves.roomId
+            ) AS occupiedTable RIGHT JOIN rooms AS r0 ON occupiedTable.id = r0.id
+        ) AS remainderTable INNER JOIN rooms ON  remainderTable.remainderId = rooms.id and remainderCap>0 and rooms.hotelId=#{hotelId};
+    </select>
+
+    <select id="findHotel" resultType="com.wxwl.hotelbooking.common.domain.HotelResult">
+        select <include refid="Hotel_Result_List"></include>
+        from(
+        select *
+        from hotels
+        WHERE hotels.hotelId=#{hotelId}
+        )AS ta LEFT JOIN chains ON ta.chainId=chains.chainId
+        LEFT JOIN brands ON ta.brandId=brands.brandId
     </select>
 </mapper>

@@ -1,11 +1,8 @@
 package com.wxwl.hotelbooking.common.domain;
 
-import com.wxwl.hotelbooking.service.ReservesService;
-
 import java.util.Date;
 
-// 撤回修改 --lyk
-public class Reserves {
+public class ReservesResult {
     private Integer id;
 
     private Integer hotelid;
@@ -24,9 +21,19 @@ public class Reserves {
 
     private Date checkoutat;
 
-    private ReservesService.PayWay pay;
+    private String pay;
 
     private Long price;
+
+    private int numOfCustomers=2;
+
+    public int getNumOfCustomers() {
+        return numOfCustomers;
+    }
+
+    public void setNumOfCustomers(int numOfCustomers) {
+        this.numOfCustomers = numOfCustomers;
+    }
 
     public Integer getId() {
         return id;
@@ -100,12 +107,12 @@ public class Reserves {
         this.checkoutat = checkoutat;
     }
 
-    public ReservesService.PayWay getPay() {
+    public String getPay() {
         return pay;
     }
 
-    public void setPay(ReservesService.PayWay pay) {
-        this.pay = pay == null ? null : pay;
+    public void setPay(String pay) {
+        this.pay = pay == null ? null : pay.trim();
     }
 
     public Long getPrice() {
@@ -116,7 +123,7 @@ public class Reserves {
         this.price = price;
     }
 
-    public Reserves(Integer id, Integer hotelid, Integer roomid, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, ReservesService.PayWay pay, Long price) {
+    public ReservesResult(Integer id, Integer hotelid, Integer roomid, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, String pay, Long price, int numOfCustomers) {
         this.id = id;
         this.hotelid = hotelid;
         this.roomid = roomid;
@@ -128,8 +135,9 @@ public class Reserves {
         this.checkoutat = checkoutat;
         this.pay = pay;
         this.price = price;
+        this.numOfCustomers = numOfCustomers;
     }
 
-    public Reserves() {
+    public ReservesResult() {
     }
 }
