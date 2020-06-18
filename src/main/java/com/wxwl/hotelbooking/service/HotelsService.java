@@ -39,7 +39,7 @@ public class HotelsService {
         List<HotelResult> nullList = new ArrayList<>();
         int page = 1;
         //检查页号是否正确
-        if(pageNo < 0){
+        if(pageNo <= 0){
             return nullList;
         }else{
             page = (pageNo-1) * pageSize;
@@ -64,7 +64,6 @@ public class HotelsService {
         }else if(hotels.size() == 0){
             return nullList;
         }
-        System.out.println(page+"   "+pageSize);
         List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels,page,pageSize);
         return res;
     }

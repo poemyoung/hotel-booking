@@ -65,7 +65,7 @@
                 on rooms.id = tb.roomId
             )  t group by t.hotelId having SUM(roomCap) >= #{num}
         ) tc
-            <if test="pageSize >0">
+            <if test="page >= 0 and pageSize >0">
                 limit  #{page} , #{pageSize}
             </if>
         ;
