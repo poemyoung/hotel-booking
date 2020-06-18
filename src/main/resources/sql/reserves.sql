@@ -31,7 +31,7 @@ CREATE TABLE `reserves` (
   `userEmail` varchar(255) DEFAULT NULL,
   `checkInAt` date NOT NULL,
   `checkOutAt` date NOT NULL,
-  `pay` enum('Alipay','WeChat Pay','Unionpay') NOT NULL,
+  `pay` enum('Alipay','WeChat Pay',' Unionpay') NOT NULL,
   `price` decimal(11,0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

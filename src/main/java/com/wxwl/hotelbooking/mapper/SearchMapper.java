@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface SearchMapper {
 
-    List<HotelResult> searchByConditions(Date checkIn, Date checkOut, Integer num, List<Hotels> hotelList);
+    List<HotelResult> searchByConditions(Date checkIn, Date checkOut, Integer num, List<Hotels> hotelList,int page,int pageSize);
 
 }
