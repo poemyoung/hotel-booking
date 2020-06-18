@@ -3,6 +3,7 @@ package com.wxwl.hotelbooking.service;
 import com.wxwl.hotelbooking.common.domain.HotelResult;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.domain.HotelsExample;
+import com.wxwl.hotelbooking.common.domain.Rooms;
 import com.wxwl.hotelbooking.mapper.HotelsMapper;
 import com.wxwl.hotelbooking.mapper.SearchMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,5 +127,28 @@ public class HotelsService {
         ListOperations ops = redisTemplate.opsForList();
         ops.leftPushAll(location,hotels);
         return hotels;
+    }
+
+    //查找hotelId酒店下[In,Out]时间段内有空余的房间信息
+    public List<Rooms> findRooms(int hotelId, String checkInTime, String checkOutTime){
+        java.sql.Date checkIn = null;
+        java.sql.Date checkOut = null;
+        try{
+            checkIn = stringToDate(checkInTime);
+            checkOut = stringToDate(checkOutTime);
+        }catch (ParseException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        //检查时间是否正确
+        if(checkIn.compareTo(checkOut) >= 0){
+            return new ArrayList<>();
+        }
+        List<Rooms> res = sMapper.findRooms(hotelId,checkIn,checkOut);
+        return res;
+    }
+
+    public HotelResult findHotel(int hotelId){
+        return sMapper.findHotel(hotelId);  //调用xml的findHotel查询
     }
 }

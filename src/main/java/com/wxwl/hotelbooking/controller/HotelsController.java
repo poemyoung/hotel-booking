@@ -1,6 +1,8 @@
 package com.wxwl.hotelbooking.controller;
 
 import com.wxwl.hotelbooking.common.domain.HotelResult;
+import com.wxwl.hotelbooking.common.domain.Rooms;
+import com.wxwl.hotelbooking.common.domain.RoomsResult;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.HotelsService;
@@ -54,6 +56,32 @@ public class HotelsController {
         }else {
             res = Result.success(list);
         }
+        return res;
+    }
+
+    @ApiOperation(value = "根据条件显示某酒店详情",notes = "酒店id,入住时间和离店时间")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name="hotelId",dataType = "Integer",required = true,value = "酒店id",defaultValue = "1297"),
+            @ApiImplicitParam(paramType = "query",name = "checkInTime",dataType = "String",required = true,value = "入住时间",defaultValue = "2020-6-12"),
+            @ApiImplicitParam(paramType = "query",name="checkOutTime",dataType = "String",required = true,value = "离店时间",defaultValue = "2020-6-13")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "success"),
+            @ApiResponse(code= 400,message = "Params Error"),
+            @ApiResponse(code = 404,message = "Not Found")
+    })
+    @GetMapping("/accommodations/id")
+    // /accommodations/id?hotelId=1297&checkInTime=2020-06-14&checkOutTime=2020-06-21
+    public Object showHotel(@RequestParam(defaultValue = "1297") int hotelId,
+                            @RequestParam(defaultValue = "2020-6-12") String checkInTime,
+                            @RequestParam(defaultValue = "2020-6-13") String checkOutTime){
+        Result res;
+        RoomsResult roomsResult = new RoomsResult();
+        HotelResult hotel = hotelsService.findHotel(hotelId);   //hotel存放hotelId的酒店信息
+        roomsResult.setHotel(hotel);
+        List<Rooms> rooms = hotelsService.findRooms(hotelId,checkInTime,checkOutTime);  //rooms存放hotelId的房间信息
+        roomsResult.setRooms(rooms);
+        res = Result.success(roomsResult);
         return res;
     }
 }
