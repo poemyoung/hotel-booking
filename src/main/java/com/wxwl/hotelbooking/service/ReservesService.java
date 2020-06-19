@@ -74,14 +74,7 @@ public class ReservesService {
             return  new ReservesResult();
         }
 
-        List<Hotels> hotelsList = new ArrayList<>();
-        hotelsList.add(hotelsMapper.selectByPrimaryKey(hotelId));
-
-        // 检查room在入住-退房时间段是否有剩余，未解决
-        /*if(searchMapper.searchByConditions(checkInTime,checkOutTime,1,hotelsList,1,1).isEmpty()){
-            System.out.println("房间剩余数目不足！");
-            return new ReservesResult();
-        }*/
+        // 检查剩余房间数
         if(!ExistEmptyRooms(hotelId,roomId,checkInTime,checkOutTime))
         {
             System.out.println("房间剩余数目不足！");
@@ -139,11 +132,14 @@ public class ReservesService {
         return null;
     }
 
+    // 判断是否有空闲房间
     public boolean ExistEmptyRooms(int hotelId,int roomId,Date checkInAt,Date checkOutAt)
     {
         ReservesExample reservesExample = new ReservesExample();
+        // select已订房间
         reservesExample.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt);
         List<Reserves> reservesList = reservesMapper.selectByExample(reservesExample);
+        // 已订房间数 < 房间总数 ==> 有空闲房间
         if(reservesList.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
             return true;
         return false;
