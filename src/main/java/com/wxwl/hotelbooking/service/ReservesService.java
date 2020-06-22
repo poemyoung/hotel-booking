@@ -93,8 +93,8 @@ public class ReservesService {
 
         // 返回自增id
         int id = reserve.getId();
-        createAt = reserve.getCreateat();
-        //System.out.println(createAt);
+        // createAt = reserve.getCreateat();
+        // System.out.println(createAt);
 
         // 检查时间是否正确
         if(checkInTime.compareTo(checkOutTime) >= 0){
@@ -102,7 +102,7 @@ public class ReservesService {
         }else if(id == 0){
             // 检查id是否正常
             System.out.println("返回自增id失败！");
-            return  new ReservesResult();
+            return new ReservesResult();
         }
         ReservesResult res = new ReservesResult(id,hotelId,roomId,createAt,userName,userPhone,userEmail,checkInTime,checkOutTime,payway,price,numOfCustomers);
         return res;
@@ -135,12 +135,22 @@ public class ReservesService {
     // 判断是否有空闲房间
     public boolean ExistEmptyRooms(int hotelId,int roomId,Date checkInAt,Date checkOutAt)
     {
-        ReservesExample reservesExample = new ReservesExample();
-        // select已订房间
-        reservesExample.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt);
-        List<Reserves> reservesList = reservesMapper.selectByExample(reservesExample);
+
+        ReservesExample example1 = new ReservesExample();
+        ReservesExample example2 = new ReservesExample();
+
+        // select已订房间,
+
+        example1.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt).andRoomidEqualTo(roomId);
+        example2.createCriteria().andCheckinatLessThan(checkInAt).andCheckoutatGreaterThan(checkOutAt).andRoomidEqualTo(roomId);
+        // example2
+
+        List<Reserves> reservesList = reservesMapper.selectByExample(example1);
+        List<Reserves> reservesList1 = reservesMapper.selectByExample(example2);
+        System.out.println(reservesList.size() + " " + reservesList1.size());
+
         // 已订房间数 < 房间总数 ==> 有空闲房间
-        if(reservesList.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
+        if(reservesList.size() + reservesList1.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
             return true;
         return false;
     }

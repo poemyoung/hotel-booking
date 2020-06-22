@@ -1,6 +1,5 @@
 package com.wxwl.hotelbooking.common.domain;
 
-// 撤回修改 --lyk
 public class Hotels {
     private Integer hotelid;
 

@@ -38,6 +38,7 @@
         <table tableName="hotels" domainObjectName="Hotels"/>
         <table tableName="rooms" domainObjectName="Rooms" />
         <table tableName="reserves" domainObjectName="Reserves"/>
+        <table tableName="users" domainObjectName="Users"/>
 
 
     </context>

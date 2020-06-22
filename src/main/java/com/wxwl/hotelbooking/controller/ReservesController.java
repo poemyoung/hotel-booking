@@ -2,20 +2,26 @@ package com.wxwl.hotelbooking.controller;
 
 import com.wxwl.hotelbooking.common.domain.ReservesResult;
 import com.wxwl.hotelbooking.common.domain.Reserves;
+import com.wxwl.hotelbooking.common.utils.GetSession;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.ReservesService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebMethod;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 @Api("预订酒店相关Api")
+
 public class ReservesController {
     @Autowired
     ReservesService reservesService;
@@ -26,9 +32,21 @@ public class ReservesController {
             @ApiResponse(code = 404,message = "Not Found")
     })
 
+    /*
+    // get方法
+    @GetMapping("/reserves")
+    public Result getReserves(HttpSession httpSession) {
+        httpSession = GetSession.getSession();
+        //getReserves();
+        Result res=null;
+        addReserve();
+        return res;
+    }*/
+
     @RequestMapping("/reserves")
     @ResponseBody
     public Result addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkInTime,String checkOutTime,Integer numOfCustomers,String pay) {
+
         ReservesResult reservesResult;
         Result res;
 
