@@ -1,6 +1,7 @@
 package com.wxwl.hotelbooking.service;
 
 import com.wxwl.hotelbooking.common.domain.Users;
+import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.mapper.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class SignService {
     @Autowired(required = false)
     UsersMapper usersMapper;
 
-    public boolean SignUp(String phone,String pwd){
+    public boolean signUp(String phone,String pwd){
         if(usersMapper.selectByPhone(phone) > 0){
             return false;
         }
@@ -35,6 +36,19 @@ public class SignService {
         user.setCreateat(time);
         return usersMapper.insert(user) > 0;
     }
+
+    public ResultCode signIn(String phone, String pwd){
+        Users user = usersMapper.selectUserByPhone(phone);
+        if(user == null){
+            return ResultCode.USER_NOT_EXIST;
+        }
+        if(user.getPwd().equals(pwd)){
+            return ResultCode.SUCCESS;
+        }else {
+            return ResultCode.USER_LOGIN_ERROR;
+        }
+    }
+
 
 
 }
