@@ -56,7 +56,7 @@ public class ReservesController {
         }
         else {
             res = Result.success(list);
-            System.out.println("订单添加成功！");
+            System.out.println("订单信息获取成功！");
         }
         return res;
     }
