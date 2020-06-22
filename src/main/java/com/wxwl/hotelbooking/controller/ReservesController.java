@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.jws.WebMethod;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@Api("预订酒店相关Api")
+@Api("订单相关Api")
 
 public class ReservesController {
+
     @Autowired
     ReservesService reservesService;
 
@@ -32,21 +34,37 @@ public class ReservesController {
             @ApiResponse(code = 404,message = "Not Found")
     })
 
-    /*
-    // get方法
+
+    @ApiOperation("获得用户订单信息")
     @GetMapping("/reserves")
-    public Result getReserves(HttpSession httpSession) {
-        httpSession = GetSession.getSession();
-        //getReserves();
-        Result res=null;
-        addReserve();
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name="userId",dataType = "Integer",required = true,value = "用户id",defaultValue = "1"),
+    })
+    public Result getReserves(Integer userId) {
+
+        //ReservesService reservesService = new ReservesService();
+        List<Reserves> list = reservesService.getReserves(userId);
+
+        // System.out.println("get");
+
+        Result res;
+        // res = Result.success(list);
+        if(list == null){
+            //内部错误
+            res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
+            res.setMsg("参数类型错误！");
+        }
+        else {
+            res = Result.success(list);
+            System.out.println("订单添加成功！");
+        }
         return res;
-    }*/
+    }
 
-    @RequestMapping("/reserves")
-    @ResponseBody
+    @ApiOperation("用户下订单")
+    @PostMapping("/reserves")
     public Result addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkInTime,String checkOutTime,Integer numOfCustomers,String pay) {
-
+        System.out.println("post");
         ReservesResult reservesResult;
         Result res;
 
