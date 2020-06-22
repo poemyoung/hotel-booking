@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxwl.hotelbooking.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.wxwl.hotelbooking.common.domain.Users">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="idCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="smoke" jdbcType="BIT" property="smoke" />
+    <result column="levelPref" jdbcType="VARCHAR" property="levelpref" />
+    <result column="payPref" jdbcType="VARCHAR" property="paypref" />
+    <result column="accessNeed" jdbcType="VARCHAR" property="accessneed" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, phone, idCard, pwd, email, avatar, smoke, levelPref, payPref, accessNeed, createAt, 
+    userName
+  </sql>
+  <select id="selectByExample" parameterType="com.wxwl.hotelbooking.common.domain.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wxwl.hotelbooking.common.domain.UsersExample">
+    delete from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Users">
+    insert into users (id, phone, idCard, 
+      pwd, email, avatar, 
+      smoke, levelPref, payPref, 
+      accessNeed, createAt, userName
+      )
+    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{smoke,jdbcType=BIT}, #{levelpref,jdbcType=VARCHAR}, #{paypref,jdbcType=VARCHAR}, 
+      #{accessneed,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wxwl.hotelbooking.common.domain.Users">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="smoke != null">
+        smoke,
+      </if>
+      <if test="levelpref != null">
+        levelPref,
+      </if>
+      <if test="paypref != null">
+        payPref,
+      </if>
+      <if test="accessneed != null">
+        accessNeed,
+      </if>
+      <if test="createat != null">
+        createAt,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="smoke != null">
+        #{smoke,jdbcType=BIT},
+      </if>
+      <if test="levelpref != null">
+        #{levelpref,jdbcType=VARCHAR},
+      </if>
+      <if test="paypref != null">
+        #{paypref,jdbcType=VARCHAR},
+      </if>
+      <if test="accessneed != null">
+        #{accessneed,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wxwl.hotelbooking.common.domain.UsersExample" resultType="java.lang.Long">
+    select count(*) from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update users
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null">
+        idCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smoke != null">
+        smoke = #{record.smoke,jdbcType=BIT},
+      </if>
+      <if test="record.levelpref != null">
+        levelPref = #{record.levelpref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paypref != null">
+        payPref = #{record.paypref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessneed != null">
+        accessNeed = #{record.accessneed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createat != null">
+        createAt = #{record.createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update users
+    set id = #{record.id,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      idCard = #{record.idcard,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      smoke = #{record.smoke,jdbcType=BIT},
+      levelPref = #{record.levelpref,jdbcType=VARCHAR},
+      payPref = #{record.paypref,jdbcType=VARCHAR},
+      accessNeed = #{record.accessneed,jdbcType=VARCHAR},
+      createAt = #{record.createat,jdbcType=TIMESTAMP},
+      userName = #{record.username,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wxwl.hotelbooking.common.domain.Users">
+    update users
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="smoke != null">
+        smoke = #{smoke,jdbcType=BIT},
+      </if>
+      <if test="levelpref != null">
+        levelPref = #{levelpref,jdbcType=VARCHAR},
+      </if>
+      <if test="paypref != null">
+        payPref = #{paypref,jdbcType=VARCHAR},
+      </if>
+      <if test="accessneed != null">
+        accessNeed = #{accessneed,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        createAt = #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wxwl.hotelbooking.common.domain.Users">
+    update users
+    set phone = #{phone,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      smoke = #{smoke,jdbcType=BIT},
+      levelPref = #{levelpref,jdbcType=VARCHAR},
+      payPref = #{paypref,jdbcType=VARCHAR},
+      accessNeed = #{accessneed,jdbcType=VARCHAR},
+      createAt = #{createat,jdbcType=TIMESTAMP},
+      userName = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
