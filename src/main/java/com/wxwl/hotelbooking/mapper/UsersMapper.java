@@ -31,4 +31,7 @@ public interface UsersMapper {
 
     @Select("SELECT COUNT(*) FROM users WHERE phone=#{phone}")
     int selectByPhone(String phone);
+
+    @Select("SELECT * FROM users WHERE phone=#{phone}")
+    Users selectUserByPhone(String phone);
 }
