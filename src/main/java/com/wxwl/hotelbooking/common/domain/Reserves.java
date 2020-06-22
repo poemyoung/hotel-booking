@@ -1,10 +1,10 @@
 package com.wxwl.hotelbooking.common.domain;
 
+
 import com.wxwl.hotelbooking.service.ReservesService;
 
 import java.util.Date;
 
-// 撤回修改 --lyk
 public class Reserves {
     private Integer id;
 
@@ -57,7 +57,7 @@ public class Reserves {
     }
 
     public void setCreateat(Date createat) {
-        this.createat = createat == null ? null : createat;
+        this.createat = createat;
     }
 
     public String getUsername() {
@@ -128,8 +128,5 @@ public class Reserves {
         this.checkoutat = checkoutat;
         this.pay = pay;
         this.price = price;
-    }
-
-    public Reserves() {
     }
 }
