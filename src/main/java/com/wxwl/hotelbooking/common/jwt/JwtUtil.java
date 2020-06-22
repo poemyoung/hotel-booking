@@ -4,7 +4,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.context.annotation.Configuration;
 
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,25 +13,29 @@ import java.util.Map;
  */
 @Configuration
 public class JwtUtil {
-    private static long EXPIRATION_TIME = 3600_000_000L;
-    private static String SECRET = "mySecret";// 秘钥
+
+    private static long EXPIRATION_TIME = JwtMsg.EXPIRATION_TIME;
+    private static String SECRET = JwtMsg.SECRET;// 秘钥
+
 
     /**
      * 生成jwtToken
      */
     public static String generateToken(String userPhone) {
+
         HashMap<String, Object> map = new HashMap<>();
         // you can put any data in the map
         map.put("userPhone", userPhone);
+        Date expire_time = new Date(System.currentTimeMillis()+EXPIRATION_TIME);
+        System.out.println(expire_time);
         //加密算法
         String jwt = Jwts.builder()
                 .setClaims(map)
-                .setExpiration(new Date(EXPIRATION_TIME))
+                .setExpiration(expire_time)
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         return jwt;
     }
-
     /**
      * 校验jwtToken
      *
@@ -52,7 +55,6 @@ public class JwtUtil {
             throw new TokenValidationException("Missing token");
         }
     }
-
     /**
      * 异常类，负责处理token的异常
      */

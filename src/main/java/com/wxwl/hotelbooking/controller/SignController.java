@@ -49,7 +49,7 @@ public class SignController {
         ResultCode code = signService.signIn(userTmp.getPhone(),userTmp.getPassword());
         res.setResultCode(code);
         if(code == ResultCode.SUCCESS){
-            String jwt = JwtUtil.generateToken(userTmp.getPassword());
+            String jwt = JwtUtil.generateToken(userTmp.getPhone());
             HashMap<String,String> map = new HashMap<>();
             map.put("token",jwt);
             res = Result.success(map);
@@ -65,10 +65,8 @@ public class SignController {
         public String getPhone() {
             return phone;
         }
-
         public String getPassword() {
             return password;
         }
     }
-
 }
