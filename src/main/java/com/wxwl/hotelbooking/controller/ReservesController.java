@@ -30,7 +30,6 @@ public class ReservesController {
     @ResponseBody
     public Result addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkInTime,String checkOutTime,Integer numOfCustomers,String pay) {
         ReservesResult reservesResult;
-
         reservesResult = reservesService.addReserve(hotelId,roomId,userName,userPhone,userEmail,checkInTime,checkOutTime,numOfCustomers,pay);
         // Result result = null;
         //System.out.println(hotelId);
