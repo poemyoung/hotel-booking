@@ -37,4 +37,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+INSERT INTO `users` VALUES (0,'1-262-831-7615','Jena Dunn','5115aayyyymmddxxxx','123456','id@non.net',null,null,null,null,null,now());
+
 SET FOREIGN_KEY_CHECKS = 1;

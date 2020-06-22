@@ -1,10 +1,8 @@
 package com.wxwl.hotelbooking.service;
 
 import com.wxwl.hotelbooking.common.domain.*;
-import com.wxwl.hotelbooking.mapper.HotelsMapper;
-import com.wxwl.hotelbooking.mapper.ReservesMapper;
-import com.wxwl.hotelbooking.mapper.RoomsMapper;
-import com.wxwl.hotelbooking.mapper.SearchMapper;
+import com.wxwl.hotelbooking.controller.SignController;
+import com.wxwl.hotelbooking.mapper.*;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +29,33 @@ public class ReservesService {
 
     @Autowired(required = false)
     SearchMapper searchMapper;
+
+    @Autowired(required = false)
+    UsersMapper usersMapper;
+
+    public List<Reserves> getReserves(Integer userId)
+    {
+
+        //List<Reserves> reservesResult = new ArrayList<>();
+
+        // 检查用户id
+        // System.out.println(userId);
+        if(usersMapper.selectByPrimaryKey(userId) == null)
+        {
+            System.out.println("用户不存在！");
+            return null;
+        }
+
+        // 检查密码
+
+        // 选择
+
+        ReservesExample example = new ReservesExample();
+        example.createCriteria().andUserphoneEqualTo(usersMapper.selectByPrimaryKey(userId).getPhone());
+        List<Reserves> reserves = reservesMapper.selectByExample(example);
+
+        return reserves;
+    }
 
     public ReservesResult addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkIn,String checkOut,Integer numOfCustomers,String payway){
         // 检查hotelId
