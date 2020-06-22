@@ -4,6 +4,7 @@ import com.wxwl.hotelbooking.common.domain.Users;
 import com.wxwl.hotelbooking.common.domain.UsersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface UsersMapper {
     long countByExample(UsersExample example);
@@ -27,4 +28,7 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
+    @Select("SELECT COUNT(*) FROM users WHERE phone=#{phone}")
+    int selectByPhone(String phone);
 }

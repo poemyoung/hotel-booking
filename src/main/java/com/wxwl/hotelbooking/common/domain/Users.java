@@ -25,6 +25,8 @@ public class Users {
 
     private Date createat;
 
+    private String username;
+
     public Integer getId() {
         return id;
     }
@@ -111,5 +113,13 @@ public class Users {
 
     public void setCreateat(Date createat) {
         this.createat = createat;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 }

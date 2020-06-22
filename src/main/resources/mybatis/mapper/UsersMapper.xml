@@ -13,6 +13,7 @@
     <result column="payPref" jdbcType="VARCHAR" property="paypref" />
     <result column="accessNeed" jdbcType="VARCHAR" property="accessneed" />
     <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, idCard, pwd, email, avatar, smoke, levelPref, payPref, accessNeed, createAt
+    id, phone, idCard, pwd, email, avatar, smoke, levelPref, payPref, accessNeed, createAt,
+    userName
   </sql>
   <select id="selectByExample" parameterType="com.wxwl.hotelbooking.common.domain.UsersExample" resultMap="BaseResultMap">
     select
@@ -90,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from users
     where id = #{id,jdbcType=INTEGER}
@@ -106,14 +108,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Users">
-    insert into users (id, phone, idCard, 
-      pwd, email, avatar, 
-      smoke, levelPref, payPref, 
-      accessNeed, createAt)
-    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
-      #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{smoke,jdbcType=BIT}, #{levelpref,jdbcType=VARCHAR}, #{paypref,jdbcType=VARCHAR}, 
-      #{accessneed,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP})
+    insert into users (id, phone, idCard,
+      pwd, email, avatar,
+      smoke, levelPref, payPref,
+      accessNeed, createAt, userName
+      )
+    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR},
+      #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+      #{smoke,jdbcType=BIT}, #{levelpref,jdbcType=VARCHAR}, #{paypref,jdbcType=VARCHAR},
+      #{accessneed,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wxwl.hotelbooking.common.domain.Users">
     insert into users
@@ -151,6 +155,9 @@
       <if test="createat != null">
         createAt,
       </if>
+      <if test="username != null">
+        userName,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -185,6 +192,9 @@
       </if>
       <if test="createat != null">
         #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -230,6 +240,9 @@
       <if test="record.createat != null">
         createAt = #{record.createat,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -238,16 +251,17 @@
   <update id="updateByExample" parameterType="map">
     update users
     set id = #{record.id,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      idCard = #{record.idcard,jdbcType=VARCHAR},
-      pwd = #{record.pwd,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      avatar = #{record.avatar,jdbcType=VARCHAR},
-      smoke = #{record.smoke,jdbcType=BIT},
-      levelPref = #{record.levelpref,jdbcType=VARCHAR},
-      payPref = #{record.paypref,jdbcType=VARCHAR},
-      accessNeed = #{record.accessneed,jdbcType=VARCHAR},
-      createAt = #{record.createat,jdbcType=TIMESTAMP}
+    phone = #{record.phone,jdbcType=VARCHAR},
+    idCard = #{record.idcard,jdbcType=VARCHAR},
+    pwd = #{record.pwd,jdbcType=VARCHAR},
+    email = #{record.email,jdbcType=VARCHAR},
+    avatar = #{record.avatar,jdbcType=VARCHAR},
+    smoke = #{record.smoke,jdbcType=BIT},
+    levelPref = #{record.levelpref,jdbcType=VARCHAR},
+    payPref = #{record.paypref,jdbcType=VARCHAR},
+    accessNeed = #{record.accessneed,jdbcType=VARCHAR},
+    createAt = #{record.createat,jdbcType=TIMESTAMP},
+    userName = #{record.username,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -285,6 +299,9 @@
       <if test="createat != null">
         createAt = #{createat,jdbcType=TIMESTAMP},
       </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -299,7 +316,8 @@
       levelPref = #{levelpref,jdbcType=VARCHAR},
       payPref = #{paypref,jdbcType=VARCHAR},
       accessNeed = #{accessneed,jdbcType=VARCHAR},
-      createAt = #{createat,jdbcType=TIMESTAMP}
+      createAt = #{createat,jdbcType=TIMESTAMP},
+      userName = #{username,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

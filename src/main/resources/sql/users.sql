@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `phone` varchar(255) NOT NULL,
+  `userName` varchar(255) NOT NULL,
   `idCard` varchar(255) DEFAULT NULL,
   `pwd` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
