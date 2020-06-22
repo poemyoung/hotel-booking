@@ -30,16 +30,33 @@ public class ReservesController {
     @ResponseBody
     public Result addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkInTime,String checkOutTime,Integer numOfCustomers,String pay) {
         ReservesResult reservesResult;
+        Result res;
+        // 判断空
+        if(hotelId==null||roomId==null||userName==null||userPhone==null||checkInTime==null||checkOutTime==null)
+        {
+            System.out.println("必要条件输入为空！");
+            //res.failure(ResultCode.RESULE_DATA_NONE);
+            res = Result.failure(ResultCode.RESULE_DATA_NONE);
+            res.setMsg("数据为空！");
+            return res;
+        }
+        // 设置默认值
+        if(userEmail == null)
+            userEmail = "";
+        if(numOfCustomers == null)
+            numOfCustomers = 2;
+        if(pay == null)
+            pay = "Unionpay";
         reservesResult = reservesService.addReserve(hotelId,roomId,userName,userPhone,userEmail,checkInTime,checkOutTime,numOfCustomers,pay);
         // Result result = null;
         //System.out.println(hotelId);
-        Result res;
+
         if(reservesResult == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
             res.setMsg("参数类型错误！");
         }else if (reservesResult.getId() == null){
-            res = Result.failure(ResultCode.RESULE_DATA_NONE);
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
             res.setMsg("数据有误！");
         }
         else {

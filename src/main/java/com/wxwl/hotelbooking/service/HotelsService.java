@@ -80,7 +80,7 @@ public class HotelsService {
     public java.sql.Date stringToDate(String input) throws ParseException {
         Date utilDate = sdf.parse(input);
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        System.out.println(sqlDate);
+        //System.out.println(sqlDate);
         return sqlDate;
     }
 
