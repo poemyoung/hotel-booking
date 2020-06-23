@@ -17,7 +17,6 @@ public class JwtUtil {
     private static long EXPIRATION_TIME = JwtMsg.EXPIRATION_TIME;
     private static String SECRET = JwtMsg.SECRET;// 秘钥
 
-
     /**
      * 生成jwtToken
      */

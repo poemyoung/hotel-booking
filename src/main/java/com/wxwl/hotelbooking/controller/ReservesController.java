@@ -70,6 +70,6 @@ public class ReservesController {
 
 
         return res;
-        //return userName + " " + numOfCustomers + " " + userPhone + " " +checkInTime + " " +checkOutTime;
+
     }
 }

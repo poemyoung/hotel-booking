@@ -41,6 +41,7 @@ public class SignController {
 
     @PostMapping("/users/login")
     public Result SignIn(@ModelAttribute UserTmp userTmp){
+
         Result res = new Result();
         if(userTmp == null||userTmp.getPhone() == null){
             res.setResultCode(ResultCode.PARAM_IS_BLANK);

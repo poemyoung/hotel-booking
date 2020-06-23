@@ -29,6 +29,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Autowired
     RolesMapper rolesMapper;
+    @Autowired
+    JwtTokenMsg jwtTokenMsg;
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest request = (HttpServletRequest)req;
@@ -54,15 +56,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             final  String token = authHeader.substring(7);
             try{
                 final Claims claims = Jwts.parser().setSigningKey(JwtMsg.SECRET).parseClaimsJws(token).getBody();
-                request.setAttribute("claims",claims);
-                //需要更改的代码
-                Roles role = new Roles();
-                role.setId((String)claims.get("userPhone"));
-                role.setRole("USER");
-                role.setToken(token);
-                rolesMapper.insert(role);
+                jwtTokenMsg.storeToRedis(claims,token);
                 //尾
-                System.out.println(claims);
             }catch (final SignatureException | MalformedJwtException e){
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write(failureJson());
