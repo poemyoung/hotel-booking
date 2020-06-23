@@ -1,7 +1,6 @@
 package com.wxwl.hotelbooking.common.jwt;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wxwl.hotelbooking.common.domain.Roles;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.mapper.RolesMapper;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.GenericFilterBean;
 
-import javax.management.relation.Role;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter(filterName = "JwtFilter", urlPatterns = "/hotels/*")
+@WebFilter(filterName = "JwtFilter", urlPatterns = {"/reserves/*","/hotels/*","/test/*"})
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Autowired

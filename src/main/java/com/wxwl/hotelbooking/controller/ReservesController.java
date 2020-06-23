@@ -5,6 +5,7 @@ import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.ReservesService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class ReservesController {
             @ApiResponse(code = 404,message = "Not Found")
     })
 
+    @ApiOperation(value = "预定酒店",notes = "用户预定酒店")
     @RequestMapping("/reserves")
     @ResponseBody
     public Result addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkInTime,String checkOutTime,Integer numOfCustomers,String pay) {
