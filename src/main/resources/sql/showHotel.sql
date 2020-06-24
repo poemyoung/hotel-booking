@@ -35,3 +35,5 @@ from (
     WHERE hotelId=1297
 ) AS ta LEFT JOIN chains ON ta.chainId=chains.chainId
 LEFT JOIN brands ON ta.brandId=brands.brandId;
+
+
