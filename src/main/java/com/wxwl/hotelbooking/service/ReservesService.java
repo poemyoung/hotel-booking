@@ -16,6 +16,7 @@ import java.util.List;
 
 @Service
 public class ReservesService {
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired(required = false)
@@ -33,25 +34,24 @@ public class ReservesService {
     @Autowired(required = false)
     UsersMapper usersMapper;
 
-    public List<Reserves> getReserves(Integer userId)
+    public Reserves adminGetReserves(String id){
+
+        return null;
+    }
+
+    public List<Reserves> userGetReserves(String userPhone)
     {
-
-        //List<Reserves> reservesResult = new ArrayList<>();
-
         // 检查用户id
         // System.out.println(userId);
-        if(usersMapper.selectByPrimaryKey(userId) == null)
+        if(usersMapper.selectByPhone(userPhone) == 0)
         {
             System.out.println("用户不存在！");
             return null;
         }
 
-        // 检查密码
-
-        // 选择
-
+        // select该用户所有订单
         ReservesExample example = new ReservesExample();
-        example.createCriteria().andUserphoneEqualTo(usersMapper.selectByPrimaryKey(userId).getPhone());
+        example.createCriteria().andUserphoneEqualTo(userPhone);
         List<Reserves> reserves = reservesMapper.selectByExample(example);
 
         return reserves;
@@ -172,7 +172,7 @@ public class ReservesService {
 
         List<Reserves> reservesList = reservesMapper.selectByExample(example1);
         List<Reserves> reservesList1 = reservesMapper.selectByExample(example2);
-        System.out.println(reservesList.size() + " " + reservesList1.size());
+        //System.out.println(reservesList.size() + " " + reservesList1.size());
 
         // 已订房间数 < 房间总数 ==> 有空闲房间
         if(reservesList.size() + reservesList1.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())

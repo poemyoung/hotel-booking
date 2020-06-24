@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter(filterName = "JwtFilter", urlPatterns = "/hotels/*")
+@WebFilter(filterName = "JwtFilter", urlPatterns = {"/hotels/*"})
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Autowired

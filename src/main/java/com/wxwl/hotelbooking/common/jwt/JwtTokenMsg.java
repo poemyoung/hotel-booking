@@ -19,6 +19,7 @@ public class JwtTokenMsg {
 
     public  void storeToRedis(Claims claims,String token){
         String userPhone;
+        System.out.println("storeToRedis");
         if(claims == null || claims.get("userPhone") == null){
             userPhone = "";
         }else {
