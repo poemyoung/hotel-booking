@@ -47,6 +47,9 @@ spring.cache.cache-names: cache
 jwt:
   secret: mySecret
   expire: 3600_000_000L
+  # 文件大小配置
+spring.servlet.multipart.max-file-size: 100MB
+spring.servlet.multipart.max-request-size: 1000MB
 
 
 

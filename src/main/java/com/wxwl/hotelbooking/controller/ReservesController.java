@@ -85,7 +85,7 @@ public class ReservesController {
     })
 
     public Result addReserve( @RequestHeader String Authorization,
-                              Integer hotelId,
+                             Integer hotelId,
                               Integer roomId,
                               String checkInTime,
                               String checkOutTime,
