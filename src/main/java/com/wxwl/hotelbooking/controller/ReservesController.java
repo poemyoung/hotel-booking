@@ -33,14 +33,25 @@ public class ReservesController {
 
     // 用户查看订单
     @GetMapping("/reserves")
-    public Result UsergetReserves(@RequestHeader String Authorization){
+    public Result UserGetReserves(@RequestHeader String Authorization) {
+        Result res;
+
+        // 判断用户类型
+        if(!jwtTokenMsg.getRole(Authorization).equals("user"))
+        {
+            System.out.println("你不是用户！");
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
+            res.setMsg("你不是用户！");
+            return res;
+        }
+
         // 从Redis中获得用户电话
         String userPhone = jwtTokenMsg.getId(Authorization);
 
         //
         List<Reserves> reserves = reservesService.userGetReserves(userPhone);
 
-        Result res;
+
         if(reserves == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
@@ -54,13 +65,30 @@ public class ReservesController {
     }
 
     // 酒店管理员查看订单
-    @GetMapping("/admins/{id}")
-    public Result adminGetReserves(@RequestHeader String Authorization, @PathVariable String id){
-
-        System.out.println("管理员查看订单controller");
-        Reserves reserves = reservesService.adminGetReserves(id);
-
+    @GetMapping("/admins/reserves")
+    public Result adminGetReserves(@RequestHeader String Authorization) {
         Result res;
+
+        // 判断角色是否为管理员
+        if(!jwtTokenMsg.getRole(Authorization).equals("admin"))
+        {
+            System.out.println("角色为：" + jwtTokenMsg.getRole(Authorization));
+            res = Result.failure(ResultCode.DATA_IS_WRONG);
+            res.setMsg("你不是管理员！");
+            return res;
+        }else if(jwtTokenMsg.getId(Authorization) == null) {
+            System.out.println("酒店名为空！");
+            res = Result.failure(ResultCode.RESULE_DATA_NONE);
+            res.setMsg("酒店名为空");
+        }
+
+        // 获取Auth信息
+        String hotelName = jwtTokenMsg.getId(Authorization);
+
+        //System.out.println("hotelName:"+hotelName);
+        List<Reserves> reserves = reservesService.adminGetReserves(hotelName);
+
+
         if(reserves == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);

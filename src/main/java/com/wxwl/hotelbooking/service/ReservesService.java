@@ -34,9 +34,15 @@ public class ReservesService {
     @Autowired(required = false)
     UsersMapper usersMapper;
 
-    public Reserves adminGetReserves(String id){
+    @Autowired(required = false)
+    AdminsMapper adminsMapper;
 
-        return null;
+    public List<Reserves> adminGetReserves(String hotelName){
+        int hotelId = adminsMapper.selectByPrimaryKey(hotelName).getHotelid();
+        ReservesExample example = new ReservesExample();
+        example.createCriteria().andHotelidEqualTo(hotelId);
+        List<Reserves> reserves = reservesMapper.selectByExample(example);
+        return reserves;
     }
 
     public List<Reserves> userGetReserves(String userPhone)
