@@ -20,11 +20,11 @@ public class JwtUtil {
     /**
      * 生成jwtToken
      */
-    public static String generateToken(String userPhone) {
-
+    public static String generateToken(String userPhone,String role) {
         HashMap<String, Object> map = new HashMap<>();
         // you can put any data in the map
         map.put("userPhone", userPhone);
+        map.put("role",role);
         Date expire_time = new Date(System.currentTimeMillis()+EXPIRATION_TIME);
         System.out.println(expire_time);
         //加密算法

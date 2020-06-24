@@ -57,7 +57,7 @@ public class ReservesService {
         return reserves;
     }
 
-    public ReservesResult addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkIn,String checkOut,Integer numOfCustomers,String payway){
+    public ReservesResult addReserve(Integer hotelId,Integer roomId,String userPhone,String checkIn,String checkOut,Integer numOfCustomers,String payway){
         // 检查hotelId
         if( hotelsMapper.selectByPrimaryKey(hotelId) == null)
         {
@@ -108,6 +108,10 @@ public class ReservesService {
 
         // 获取房间price
         long price = roomsMapper.selectByPrimaryKey(roomId).getPrice();
+
+        // 获取用户电话 邮箱
+        String userName = usersMapper.selectUserByPhone(userPhone).getUsername();
+        String userEmail = usersMapper.selectUserByPhone(userPhone).getEmail();
 
         // 获取creatAt为当前系统时间
         Date createAt= new Date();

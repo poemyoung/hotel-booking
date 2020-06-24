@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxwl.hotelbooking.mapper.AdminsMapper">
+  <resultMap id="BaseResultMap" type="com.wxwl.hotelbooking.common.domain.Admins">
+    <id column="hotelName" jdbcType="VARCHAR" property="hotelname" />
+    <result column="hotelId" jdbcType="INTEGER" property="hotelid" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hotelName, hotelId, pwd, phone, email, createAt
+  </sql>
+  <select id="selectByExample" parameterType="com.wxwl.hotelbooking.common.domain.AdminsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admins
+    where hotelName = #{hotelname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from admins
+    where hotelName = #{hotelname,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wxwl.hotelbooking.common.domain.AdminsExample">
+    delete from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Admins">
+    insert into admins (hotelName, hotelId, pwd, 
+      phone, email, createAt
+      )
+    values (#{hotelname,jdbcType=VARCHAR}, #{hotelid,jdbcType=INTEGER}, #{pwd,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wxwl.hotelbooking.common.domain.Admins">
+    insert into admins
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelname != null">
+        hotelName,
+      </if>
+      <if test="hotelid != null">
+        hotelId,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="createat != null">
+        createAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelname != null">
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wxwl.hotelbooking.common.domain.AdminsExample" resultType="java.lang.Long">
+    select count(*) from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admins
+    <set>
+      <if test="record.hotelname != null">
+        hotelName = #{record.hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelid != null">
+        hotelId = #{record.hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createat != null">
+        createAt = #{record.createat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admins
+    set hotelName = #{record.hotelname,jdbcType=VARCHAR},
+      hotelId = #{record.hotelid,jdbcType=INTEGER},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      createAt = #{record.createat,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wxwl.hotelbooking.common.domain.Admins">
+    update admins
+    <set>
+      <if test="hotelid != null">
+        hotelId = #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        createAt = #{createat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where hotelName = #{hotelname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wxwl.hotelbooking.common.domain.Admins">
+    update admins
+    set hotelId = #{hotelid,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      createAt = #{createat,jdbcType=TIMESTAMP}
+    where hotelName = #{hotelname,jdbcType=VARCHAR}
+  </update>
+</mapper>

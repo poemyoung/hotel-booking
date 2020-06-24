@@ -2,11 +2,11 @@ package com.wxwl.hotelbooking.controller;
 
 import com.wxwl.hotelbooking.common.domain.Reserves;
 import com.wxwl.hotelbooking.common.domain.ReservesResult;
+import com.wxwl.hotelbooking.common.jwt.JwtTokenMsg;
 import com.wxwl.hotelbooking.common.jwt.JwtUtil;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.ReservesService;
-import io.jsonwebtoken.Header;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +22,8 @@ public class ReservesController {
     @Autowired
     ReservesService reservesService;
 
+    @Autowired
+    JwtTokenMsg jwtTokenMsg;
 
     @ApiResponses({
             @ApiResponse(code = 200,message = "success"),
@@ -32,12 +34,8 @@ public class ReservesController {
     // 用户查看订单
     @GetMapping("/reserves")
     public Result UsergetReserves(@RequestHeader String Authorization){
-
-        System.out.println("用户查看订单controller");
-        // 从Redis中获得用户token？？？？
-        RedisTemplate redisTemplate = null;
-        //redisTemplate.opsForValue().get();
-        String userPhone = "123test phone";//JwtUtil.validateToken(Authorization);
+        // 从Redis中获得用户电话
+        String userPhone = jwtTokenMsg.getId(Authorization);
 
         //
         List<Reserves> reserves = reservesService.userGetReserves(userPhone);
@@ -86,11 +84,9 @@ public class ReservesController {
             @ApiImplicitParam(paramType = "body",name = "checkOutTime",dataType = "String",required = true,value = "离店时间",defaultValue = "2020-6-13"),
     })
 
-    public Result addReserve( Integer hotelId,
+    public Result addReserve( @RequestHeader String Authorization,
+                              Integer hotelId,
                               Integer roomId,
-                              String userName,
-                              String userPhone,
-                              String userEmail,
                               String checkInTime,
                               String checkOutTime,
                               Integer numOfCustomers,
@@ -98,8 +94,11 @@ public class ReservesController {
         ReservesResult reservesResult;
         Result res;
 
+        // 获取Auth信息
+        String userPhone = jwtTokenMsg.getId(Authorization);
+
         // 判断空
-        if(hotelId==null||roomId==null||userName==null||userPhone==null||checkInTime==null||checkOutTime==null)
+        if(hotelId==null||roomId==null||userPhone == null||checkInTime==null||checkOutTime==null)
         {
             System.out.println("必要条件输入为空！");
             //res.failure(ResultCode.RESULE_DATA_NONE);
@@ -109,14 +108,12 @@ public class ReservesController {
         }
 
         // 设置默认值
-        if(userEmail == null)
-            userEmail = "";
         if(numOfCustomers == null)
             numOfCustomers = 2;
         if(pay == null)
             pay = "Unionpay";
 
-        reservesResult = reservesService.addReserve(hotelId,roomId,userName,userPhone,userEmail,checkInTime,checkOutTime,numOfCustomers,pay);
+        reservesResult = reservesService.addReserve(hotelId,roomId,userPhone,checkInTime,checkOutTime,numOfCustomers,pay);
         // Result result = null;
         //System.out.println(hotelId);
 
