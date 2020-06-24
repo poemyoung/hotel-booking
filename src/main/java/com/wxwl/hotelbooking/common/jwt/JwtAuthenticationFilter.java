@@ -23,7 +23,7 @@ import java.io.IOException;
 
 @Slf4j
 
-@WebFilter(filterName = "JwtFilter", urlPatterns = {"/reserves/*","/hotels/*","/test/*"})
+@WebFilter(filterName = "JwtFilter", urlPatterns = {"/reserves/*","/hotels/*","/test/*","/admins/*"})
 
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
