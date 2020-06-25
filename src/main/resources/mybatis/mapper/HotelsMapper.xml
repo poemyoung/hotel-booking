@@ -540,4 +540,22 @@
       averageRating = #{averagerating,jdbcType=DOUBLE}
     where hotelId = #{hotelid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByTranslatedName" parameterType="java.lang.String" resultType="com.wxwl.hotelbooking.common.domain.Hotels">
+    select *
+    from hotels
+    where hotelTranslatedName = #{name}
+  </select>
+  <select id="selectChainId" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select chainId
+    from chains
+    where chainName = #{chainName}
+  </select>
+
+  <select id="selectBrandId" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select brandId
+    from brands
+    where brandName = #{brandName}
+  </select>
+
 </mapper>

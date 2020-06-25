@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -71,5 +72,13 @@ public class HotelsTest {
     @Test
     public void whyNulPointer(){
         System.out.println(hotelsMapper == null);
+    }
+
+    @Test
+    public void testDate(){
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String dfStr = df.format(date);
+        System.out.println(dfStr);
     }
 }

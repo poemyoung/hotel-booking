@@ -1,6 +1,5 @@
 package com.wxwl.hotelbooking.common.domain;
 
-// 撤回修改 --lyk
 public class Hotels {
     private Integer hotelid;
 
@@ -259,6 +258,42 @@ public class Hotels {
     }
 
     public void setAveragerating(Double averagerating) {
+        this.averagerating = averagerating;
+    }
+
+    public Hotels(){
+
+    }
+
+    public Hotels(Integer hotelid, Integer chainid, Integer brandid, String hotelname, String hotelformerlyname, String hoteltranslatedname,
+                  String address, Integer zipcode, Double starrating, Double longitude, Double latitude, String checkin, String checkout,
+                  Integer numberrooms, Integer numberfloors, Integer yearopened, Integer yearrenovated, String photoone, String phototwo,
+                  String photothree, String photofour, String photofive, String overview, Integer minprice, Integer numberofreviews, Double averagerating) {
+        this.hotelid = hotelid;
+        this.chainid = chainid;
+        this.brandid = brandid;
+        this.hotelname = hotelname;
+        this.hotelformerlyname = hotelformerlyname;
+        this.hoteltranslatedname = hoteltranslatedname;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.starrating = starrating;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.numberrooms = numberrooms;
+        this.numberfloors = numberfloors;
+        this.yearopened = yearopened;
+        this.yearrenovated = yearrenovated;
+        this.photoone = photoone;
+        this.phototwo = phototwo;
+        this.photothree = photothree;
+        this.photofour = photofour;
+        this.photofive = photofive;
+        this.overview = overview;
+        this.minprice = minprice;
+        this.numberofreviews = numberofreviews;
         this.averagerating = averagerating;
     }
 }

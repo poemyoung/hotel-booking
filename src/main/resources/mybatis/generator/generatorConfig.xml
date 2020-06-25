@@ -35,9 +35,8 @@
         </javaClientGenerator>
 
 
-<!--        <table tableName="users" domainObjectName="Users"/>-->
-        <table tableName="admins" domainObjectName="Admins"/>
 
+        <table tableName="admins" domainObjectName="Admins"/>
 
 
 

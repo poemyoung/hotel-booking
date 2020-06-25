@@ -203,3 +203,7 @@ INSERT INTO `hotels` VALUES (445327, 6, 4215, 'Dorsett Chengdu Hotel', NULL, '�
 INSERT INTO `hotels` VALUES (445933, 0, 0, 'Chengdu Yinsheng International Hotel', NULL, '成都寅生国际酒店', 'No.7 Wu Qing South Road', 610045, 4, 104, 31, '2:00 PM', '12:00 PM', 176, NULL, 2012, NULL, 'http://pix1.agoda.net/hotelimages/445/445933/445933_15041421310026871853.jpg?s=312x', 'http://pix4.agoda.net/hotelimages/445/445933/445933_130402105043530.jpg?s=312x', 'http://pix3.agoda.net/hotelimages/445/445933/445933_14060516520019720621.jpg?s=312x', 'http://pix5.agoda.net/hotelimages/445/445933/445933_14060516520019720622.jpg?s=312x', 'http://pix5.agoda.net/hotelimages/445/445933/445933_14060516520019720623.jpg?s=312x', '成都寅生国际酒店是一家4星级酒店，可让您的 成都之行变得更完美。 酒店想您所想，能为您提供住宿期间的一切必需品。 一切生活必需品，例如无障碍设施, 无线网络(公共区域), 停车场, 客房服务, 酒店/机场接送等都已为您准备就绪。 部分客房内设 禁烟房, 空调, 书桌, LAN宽带上网(免费), LAN宽带上网等设施，加上设计装饰温馨舒适，定能带给住客宾至如归的感受。 酒店内设多种娱乐设施。 在 成都寅生国际酒店 住宿期间，你会发现酒店内气氛温馨，服务一流，带给您宾至如归的感受。', 398, 4, 7);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+delete 
+from hotels
+where hotelTranslatedName = '铜仁辉煌酒店';

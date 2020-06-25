@@ -2,8 +2,11 @@ package com.wxwl.hotelbooking.mapper;
 
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.domain.HotelsExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface HotelsMapper {
     long countByExample(HotelsExample example);
@@ -27,4 +30,15 @@ public interface HotelsMapper {
     int updateByPrimaryKeySelective(Hotels record);
 
     int updateByPrimaryKey(Hotels record);
+
+    Hotels selectByTranslatedName(String name);
+
+    int selectChainId(String chainName);
+    int selectBrandId(String brandName);
+
+    @Select("SELECT COUNT(*) FROM hotels WHERE hotelTranslatedName = #{name}")
+    int selectByName(String name);
+
+    @Select("SELECT COUNT(*) FROM reserves WHERE hotelId=#{id} AND #{date}>=checkInAt AND #{date}<=checkOutAt")
+    int selectUnfinishedReserves(Date date, Integer id);
 }

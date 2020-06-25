@@ -1,10 +1,8 @@
 package com.wxwl.hotelbooking.service;
 
 import com.wxwl.hotelbooking.common.domain.*;
-import com.wxwl.hotelbooking.mapper.HotelsMapper;
-import com.wxwl.hotelbooking.mapper.ReservesMapper;
-import com.wxwl.hotelbooking.mapper.RoomsMapper;
-import com.wxwl.hotelbooking.mapper.SearchMapper;
+import com.wxwl.hotelbooking.controller.SignController;
+import com.wxwl.hotelbooking.mapper.*;
 import com.wxwl.hotelbooking.common.domain.Hotels;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,7 @@ import java.util.List;
 
 @Service
 public class ReservesService {
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired(required = false)
@@ -32,7 +31,39 @@ public class ReservesService {
     @Autowired(required = false)
     SearchMapper searchMapper;
 
-    public ReservesResult addReserve(Integer hotelId,Integer roomId,String userName,String userPhone,String userEmail,String checkIn,String checkOut,Integer numOfCustomers,String payway){
+    @Autowired(required = false)
+    UsersMapper usersMapper;
+
+    @Autowired(required = false)
+    AdminsMapper adminsMapper;
+
+    public List<Reserves> adminGetReserves(String hotelName){
+        int hotelId = adminsMapper.selectByPrimaryKey(hotelName).getHotelid();
+        ReservesExample example = new ReservesExample();
+        example.createCriteria().andHotelidEqualTo(hotelId);
+        List<Reserves> reserves = reservesMapper.selectByExample(example);
+        return reserves;
+    }
+
+    public List<Reserves> userGetReserves(String userPhone)
+    {
+        // 检查用户id
+        // System.out.println(userId);
+        if(usersMapper.selectByPhone(userPhone) == 0)
+        {
+            System.out.println("用户不存在！");
+            return null;
+        }
+
+        // select该用户所有订单
+        ReservesExample example = new ReservesExample();
+        example.createCriteria().andUserphoneEqualTo(userPhone);
+        List<Reserves> reserves = reservesMapper.selectByExample(example);
+
+        return reserves;
+    }
+
+    public ReservesResult addReserve(Integer hotelId,Integer roomId,String userPhone,String checkIn,String checkOut,Integer numOfCustomers,String payway){
         // 检查hotelId
         if( hotelsMapper.selectByPrimaryKey(hotelId) == null)
         {
@@ -84,6 +115,10 @@ public class ReservesService {
         // 获取房间price
         long price = roomsMapper.selectByPrimaryKey(roomId).getPrice();
 
+        // 获取用户电话 邮箱
+        String userName = usersMapper.selectUserByPhone(userPhone).getUsername();
+        String userEmail = usersMapper.selectUserByPhone(userPhone).getEmail();
+
         // 获取creatAt为当前系统时间
         Date createAt= new Date();
         Reserves reserve = new Reserves(0,hotelId,roomId,createAt,userName,userPhone,userEmail,checkInTime,checkOutTime,pay,price);
@@ -93,8 +128,8 @@ public class ReservesService {
 
         // 返回自增id
         int id = reserve.getId();
-        createAt = reserve.getCreateat();
-        //System.out.println(createAt);
+        // createAt = reserve.getCreateat();
+        // System.out.println(createAt);
 
         // 检查时间是否正确
         if(checkInTime.compareTo(checkOutTime) >= 0){
@@ -102,7 +137,7 @@ public class ReservesService {
         }else if(id == 0){
             // 检查id是否正常
             System.out.println("返回自增id失败！");
-            return  new ReservesResult();
+            return new ReservesResult();
         }
         ReservesResult res = new ReservesResult(id,hotelId,roomId,createAt,userName,userPhone,userEmail,checkInTime,checkOutTime,payway,price,numOfCustomers);
         return res;
@@ -135,12 +170,22 @@ public class ReservesService {
     // 判断是否有空闲房间
     public boolean ExistEmptyRooms(int hotelId,int roomId,Date checkInAt,Date checkOutAt)
     {
-        ReservesExample reservesExample = new ReservesExample();
-        // select已订房间
-        reservesExample.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt);
-        List<Reserves> reservesList = reservesMapper.selectByExample(reservesExample);
+
+        ReservesExample example1 = new ReservesExample();
+        ReservesExample example2 = new ReservesExample();
+
+        // select已订房间,
+
+        example1.createCriteria().andCheckinatBetween(checkInAt,checkOutAt).andCheckoutatBetween(checkInAt,checkOutAt).andRoomidEqualTo(roomId);
+        example2.createCriteria().andCheckinatLessThan(checkInAt).andCheckoutatGreaterThan(checkOutAt).andRoomidEqualTo(roomId);
+        // example2
+
+        List<Reserves> reservesList = reservesMapper.selectByExample(example1);
+        List<Reserves> reservesList1 = reservesMapper.selectByExample(example2);
+        //System.out.println(reservesList.size() + " " + reservesList1.size());
+
         // 已订房间数 < 房间总数 ==> 有空闲房间
-        if(reservesList.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
+        if(reservesList.size() + reservesList1.size() < roomsMapper.selectByPrimaryKey(roomId).getCount())
             return true;
         return false;
     }

@@ -1,9 +1,7 @@
 package com.wxwl.hotelbooking.service;
 
-import com.wxwl.hotelbooking.common.domain.HotelsExample;
 import com.wxwl.hotelbooking.common.domain.Reserves;
 import com.wxwl.hotelbooking.common.domain.ReservesExample;
-import com.wxwl.hotelbooking.mapper.AdminsMapper;
 import com.wxwl.hotelbooking.mapper.ReservesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

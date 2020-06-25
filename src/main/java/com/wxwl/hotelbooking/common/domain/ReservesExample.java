@@ -322,63 +322,53 @@ public class ReservesExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateatEqualTo(String value) {
-            addCriterion("createAt =", value, "createat");
+        public Criteria andCreateatEqualTo(Date value) {
+            addCriterionForJDBCDate("createAt =", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatNotEqualTo(String value) {
-            addCriterion("createAt <>", value, "createat");
+        public Criteria andCreateatNotEqualTo(Date value) {
+            addCriterionForJDBCDate("createAt <>", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatGreaterThan(String value) {
-            addCriterion("createAt >", value, "createat");
+        public Criteria andCreateatGreaterThan(Date value) {
+            addCriterionForJDBCDate("createAt >", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatGreaterThanOrEqualTo(String value) {
-            addCriterion("createAt >=", value, "createat");
+        public Criteria andCreateatGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("createAt >=", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatLessThan(String value) {
-            addCriterion("createAt <", value, "createat");
+        public Criteria andCreateatLessThan(Date value) {
+            addCriterionForJDBCDate("createAt <", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatLessThanOrEqualTo(String value) {
-            addCriterion("createAt <=", value, "createat");
+        public Criteria andCreateatLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("createAt <=", value, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatLike(String value) {
-            addCriterion("createAt like", value, "createat");
+        public Criteria andCreateatIn(List<Date> values) {
+            addCriterionForJDBCDate("createAt in", values, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatNotLike(String value) {
-            addCriterion("createAt not like", value, "createat");
+        public Criteria andCreateatNotIn(List<Date> values) {
+            addCriterionForJDBCDate("createAt not in", values, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatIn(List<String> values) {
-            addCriterion("createAt in", values, "createat");
+        public Criteria andCreateatBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("createAt between", value1, value2, "createat");
             return (Criteria) this;
         }
 
-        public Criteria andCreateatNotIn(List<String> values) {
-            addCriterion("createAt not in", values, "createat");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateatBetween(String value1, String value2) {
-            addCriterion("createAt between", value1, value2, "createat");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateatNotBetween(String value1, String value2) {
-            addCriterion("createAt not between", value1, value2, "createat");
+        public Criteria andCreateatNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("createAt not between", value1, value2, "createat");
             return (Criteria) this;
         }
 

@@ -43,6 +43,14 @@ spring.redis.jedis.pool.min-idle: 0
 spring.cache.type: REDIS
  # 定义缓存空间
 spring.cache.cache-names: cache
+# Jwt配置
+jwt:
+  secret: mySecret
+  expire: 3600_000_000L
+  # 文件大小配置
+spring.servlet.multipart.max-file-size: 100MB
+spring.servlet.multipart.max-request-size: 1000MB
+
 
 
 
