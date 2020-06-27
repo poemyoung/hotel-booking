@@ -1,17 +1,24 @@
 package com.wxwl.hotelbooking.controller;
 
+import com.wxwl.hotelbooking.common.domain.Hotels;
 import com.wxwl.hotelbooking.common.domain.Reserves;
 import com.wxwl.hotelbooking.common.domain.ReservesResult;
+import com.wxwl.hotelbooking.common.domain.Rooms;
 import com.wxwl.hotelbooking.common.jwt.JwtTokenMsg;
 import com.wxwl.hotelbooking.common.jwt.JwtUtil;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
+import com.wxwl.hotelbooking.mapper.HotelsMapper;
+import com.wxwl.hotelbooking.mapper.RoomsMapper;
 import com.wxwl.hotelbooking.service.ReservesService;
 import io.swagger.annotations.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,6 +31,12 @@ public class ReservesController {
 
     @Autowired
     JwtTokenMsg jwtTokenMsg;
+
+    @Autowired(required = false)
+    HotelsMapper hotelsMapper;
+
+    @Autowired(required = false)
+    RoomsMapper roomsMapper;
 
     @ApiResponses({
             @ApiResponse(code = 200,message = "success"),
@@ -51,14 +64,15 @@ public class ReservesController {
         //
         List<Reserves> reserves = reservesService.userGetReserves(userPhone);
 
+        List<OrderDetail> orderDetails = new ArrayList<>(setOrderDetails(reserves));
 
-        if(reserves == null){
+        if(orderDetails == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
             res.setMsg("参数类型错误！");
         }
         else {
-            res = Result.success(reserves);
+            res = Result.success(orderDetails);
             System.out.println("订单查询成功！");
         }
         return res;
@@ -88,14 +102,15 @@ public class ReservesController {
         //System.out.println("hotelName:"+hotelName);
         List<Reserves> reserves = reservesService.adminGetReserves(hotelName);
 
+        List<OrderDetail> orderDetails = new ArrayList<>(setOrderDetails(reserves));
 
-        if(reserves == null){
+        if(orderDetails == null){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
             res.setMsg("参数类型错误！");
         }
         else {
-            res = Result.success(reserves);
+            res = Result.success(orderDetails);
             System.out.println("订单查询成功！");
         }
         return res;
@@ -156,5 +171,158 @@ public class ReservesController {
 
         return res;
 
+    }
+
+    public List<OrderDetail> setOrderDetails(List<Reserves> reserves){
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        for (Reserves reserve:reserves)
+        {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setId(reserve.getId());
+            orderDetail.setCheckinat(reserve.getCheckinat());
+            orderDetail.setCheckoutat(reserve.getCheckoutat());
+            orderDetail.setCreateat(reserve.getCreateat());
+            orderDetail.setPay(reserve.getPay());
+            orderDetail.setPrice(reserve.getPrice());
+            orderDetail.setUseremail(reserve.getUseremail());
+            orderDetail.setUsername(reserve.getUsername());
+            orderDetail.setUserphone(reserve.getUserphone());
+            orderDetail.setHotels(hotelsMapper.selectByPrimaryKey(reserve.getHotelid()));
+            orderDetail.setRooms(roomsMapper.selectByPrimaryKey(reserve.getRoomid()));
+
+            orderDetails.add(orderDetail);
+        }
+
+        return orderDetails;
+    }
+
+    @Data
+    private class OrderDetail {
+        private Rooms rooms;
+
+        private Hotels hotels;
+
+        private Integer id;
+
+        private Date createat;
+
+        private String username;
+
+        private String userphone;
+
+        private String useremail;
+
+        private Date checkinat;
+
+        private Date checkoutat;
+
+        private ReservesService.PayWay pay;
+
+        private Long price;
+
+        public Rooms getRooms() {
+            return rooms;
+        }
+
+        public void setRooms(Rooms rooms) {
+            this.rooms = rooms;
+        }
+
+        public Hotels getHotels() {
+            return hotels;
+        }
+
+        public void setHotels(Hotels hotels) {
+            this.hotels = hotels;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public Date getCreateat() {
+            return createat;
+        }
+
+        public void setCreateat(Date createat) {
+            this.createat = createat;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getUserphone() {
+            return userphone;
+        }
+
+        public void setUserphone(String userphone) {
+            this.userphone = userphone;
+        }
+
+        public String getUseremail() {
+            return useremail;
+        }
+
+        public void setUseremail(String useremail) {
+            this.useremail = useremail;
+        }
+
+        public Date getCheckinat() {
+            return checkinat;
+        }
+
+        public void setCheckinat(Date checkinat) {
+            this.checkinat = checkinat;
+        }
+
+        public Date getCheckoutat() {
+            return checkoutat;
+        }
+
+        public void setCheckoutat(Date checkoutat) {
+            this.checkoutat = checkoutat;
+        }
+
+        public ReservesService.PayWay getPay() {
+            return pay;
+        }
+
+        public void setPay(ReservesService.PayWay pay) {
+            this.pay = pay;
+        }
+
+        public Long getPrice() {
+            return price;
+        }
+
+        public void setPrice(Long price) {
+            this.price = price;
+        }
+
+        public OrderDetail(Rooms rooms, Hotels hotels, Integer id, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, ReservesService.PayWay pay, Long price) {
+            this.rooms = rooms;
+            this.hotels = hotels;
+            this.id = id;
+            this.createat = createat;
+            this.username = username;
+            this.userphone = userphone;
+            this.useremail = useremail;
+            this.checkinat = checkinat;
+            this.checkoutat = checkoutat;
+            this.pay = pay;
+            this.price = price;
+        }
+
+        public OrderDetail() {
+        }
     }
 }

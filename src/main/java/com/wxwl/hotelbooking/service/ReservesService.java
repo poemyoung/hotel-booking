@@ -4,6 +4,7 @@ import com.wxwl.hotelbooking.common.domain.*;
 import com.wxwl.hotelbooking.controller.SignController;
 import com.wxwl.hotelbooking.mapper.*;
 import com.wxwl.hotelbooking.common.domain.Hotels;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -189,4 +190,5 @@ public class ReservesService {
             return true;
         return false;
     }
+
 }

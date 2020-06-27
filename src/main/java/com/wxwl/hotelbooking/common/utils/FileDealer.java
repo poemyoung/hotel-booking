@@ -12,7 +12,7 @@ import java.io.IOException;
 @Service
 public class FileDealer {
 
-    private final String STATIC_PATH = "/Users/xzp/Desktop/hotel-booking/src/main/resources/static/";
+    private final String STATIC_PATH = "/Users/Administrator/IdeaProjects/hotel-booking/src/main/resources/static/";
 
     public String addFile(MultipartFile file,String fileName){
         File aFile = new File(STATIC_PATH+fileName);
