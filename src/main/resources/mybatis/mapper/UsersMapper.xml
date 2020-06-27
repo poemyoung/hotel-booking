@@ -320,4 +320,18 @@
       userName = #{username,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByPhone"  parameterType="com.wxwl.hotelbooking.common.domain.Users">
+    update  users
+    set  idCard = #{idcard,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      smoke = #{smoke,jdbcType=BIT},
+      levelPref = #{levelpref,jdbcType=VARCHAR},
+      payPref = #{paypref,jdbcType=VARCHAR},
+      accessNeed = #{accessneed,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR}
+      where phone = #{phone,jdbcType=VARCHAR}
+  </update>
 </mapper>

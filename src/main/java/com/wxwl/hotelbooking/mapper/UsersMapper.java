@@ -34,5 +34,7 @@ public interface UsersMapper {
 
     @Select("SELECT * FROM users WHERE phone=#{phone}")
     Users selectUserByPhone(String phone);
+
+    int updateByPhone(Users record);
 }
 
