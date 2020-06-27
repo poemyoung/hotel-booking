@@ -54,6 +54,8 @@ public class SignController {
             res.setResultCode(ResultCode.PARAM_IS_BLANK);
             return res;
         }
+        System.out.println(userTmp.getPhone()+"?????");
+        System.out.println(role+"????");
         ResultCode code = null;
         if(role.equals("user"))
             code = signService.userSignIn(userTmp.getPhone(),userTmp.getPassword());

@@ -42,4 +42,11 @@ public class UsersInfoService {
            return false;
        }
     }
+
+    public Users getUserInfo(String phone){
+        Users aUser = usersMapper.selectUserByPhone(phone);
+        String imagePath = fileDealer.findFile(aUser.getAvatar());
+        aUser.setAvatar(imagePath);
+        return aUser;
+    }
 }

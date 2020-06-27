@@ -1,7 +1,9 @@
 package com.wxwl.hotelbooking.service;
 
+import com.wxwl.hotelbooking.common.domain.Admins;
 import com.wxwl.hotelbooking.common.domain.Reserves;
 import com.wxwl.hotelbooking.common.domain.ReservesExample;
+import com.wxwl.hotelbooking.mapper.AdminsMapper;
 import com.wxwl.hotelbooking.mapper.ReservesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class AdminsService {
 
     @Autowired(required = false)
     ReservesMapper reservesMapper;
+
+    @Autowired(required = false)
+    AdminsMapper adminsMapper;
 
     public java.sql.Date stringToDate(String input) throws ParseException {
         Date utilDate = sdf.parse(input);
@@ -42,6 +47,11 @@ public class AdminsService {
         }
         List<Reserves> reserves = reservesMapper.selectByExample(reservesExample);
         return reserves;
+    }
+
+    public Admins getAdminInfo(String hotelName){
+       Admins admins = adminsMapper.selectByPrimaryKey(hotelName);
+       return admins;
     }
 
 

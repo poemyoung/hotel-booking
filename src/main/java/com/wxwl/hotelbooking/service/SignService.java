@@ -51,7 +51,6 @@ public class SignService {
 
     @Transactional
     public ResultCode userSignIn(String phone, String pwd){
-        System.out.println(phone);
         Users user = usersMapper.selectUserByPhone(phone);
         if(user == null){
             return ResultCode.USER_NOT_EXIST;

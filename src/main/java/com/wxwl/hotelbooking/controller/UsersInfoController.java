@@ -1,18 +1,13 @@
 package com.wxwl.hotelbooking.controller;
 
 
-import com.sun.security.auth.UnixNumericUserPrincipal;
 import com.wxwl.hotelbooking.common.domain.Users;
-import com.wxwl.hotelbooking.common.jwt.JwtMsg;
 import com.wxwl.hotelbooking.common.jwt.JwtTokenMsg;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.service.UsersInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -30,7 +25,7 @@ public class UsersInfoController {
     UsersInfoService usersInfoService;
 
     @PutMapping("/users")
-    public Result load(@RequestHeader String Authorization,
+    public Result modifyUserInfo(@RequestHeader String Authorization,
                        @RequestParam(value = "avatar",defaultValue = "default1.jpg") MultipartFile avatar,
                        @RequestParam(defaultValue = "") String idCard,
                        @RequestParam(defaultValue = "") String pwd,
@@ -43,9 +38,7 @@ public class UsersInfoController {
                      ) {
         Result res = new Result();
         String phone  = jwtTokenMsg.getId(Authorization);
-        System.out.println("phone="+phone);
         String role = jwtTokenMsg.getRole(Authorization);
-        System.out.println("role="+role);
         if(role == null || !role.equals("user")||phone == null){
             res = Result.failure(ResultCode.PERMISSION_NO_ACCESS);
             return res;
@@ -64,6 +57,24 @@ public class UsersInfoController {
             return Result.failure(ResultCode.USER_NOT_EXIST);
         }
         return Result.success(ResultCode.SUCCESS);
+        }
+
+        @GetMapping("/users/{id}")
+        public Result getUserInfo(@PathVariable String id,@RequestHeader String Authorization){
+            Result res;
+            String phone  = jwtTokenMsg.getId(Authorization);
+            String role = jwtTokenMsg.getRole(Authorization);
+            if(role == null || !role.equals("user")||phone == null){
+                res = Result.failure(ResultCode.PERMISSION_NO_ACCESS);
+                return res;
+            }
+            Users aUser = usersInfoService.getUserInfo(phone);
+            if(aUser == null){
+                res = Result.failure(ResultCode.USER_NOT_EXIST);
+            }else {
+                res = Result.success(aUser);
+            }
+            return res;
         }
     }
 
