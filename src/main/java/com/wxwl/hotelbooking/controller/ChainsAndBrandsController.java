@@ -2,7 +2,6 @@ package com.wxwl.hotelbooking.controller;
 
 import com.wxwl.hotelbooking.common.domain.Brands;
 import com.wxwl.hotelbooking.common.domain.Chains;
-import com.wxwl.hotelbooking.common.domain.ChainsExample;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.mapper.BrandsMapper;
 import com.wxwl.hotelbooking.mapper.ChainsMapper;
@@ -32,9 +31,7 @@ public class ChainsAndBrandsController {
     @GetMapping("/chains")
     @ResponseBody
     public Object getChains(){
-//        ChainsExample chainsExample = new ChainsExample();
-//        chainsExample.createCriteria();
-        List<Chains> chains = chainsMapper.selectByExample(null);
+        List<Chains> chains = chainsMapper.selectAll();
         return Result.success(chains);
     }
 
@@ -48,7 +45,7 @@ public class ChainsAndBrandsController {
     @GetMapping("/brands")
     @ResponseBody
     public Object getBrands(){
-        List<Brands> brands = brandsMapper.selectByExample(null);
+        List<Brands> brands = brandsMapper.selectAll();
         return Result.success(brands);
     }
 }

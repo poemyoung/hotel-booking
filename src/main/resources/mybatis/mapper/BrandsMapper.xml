@@ -66,20 +66,6 @@
   <sql id="Base_Column_List">
     brandId, brandName
   </sql>
-  <select id="selectByExample" parameterType="com.wxwl.hotelbooking.common.domain.BrandsExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from brands
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -89,12 +75,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from brands
     where brandId = #{brandid,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.wxwl.hotelbooking.common.domain.BrandsExample">
-    delete from brands
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.wxwl.hotelbooking.common.domain.Brands">
     insert into brands (brandId, brandName)
@@ -119,12 +99,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wxwl.hotelbooking.common.domain.BrandsExample" resultType="java.lang.Long">
-    select count(*) from brands
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update brands
     <set>
