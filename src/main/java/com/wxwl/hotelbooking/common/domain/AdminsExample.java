@@ -86,7 +86,7 @@ public class AdminsExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                throw new RuntimeException("Value for condition cannot be null");
+                throw new NullPointerException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
         }
