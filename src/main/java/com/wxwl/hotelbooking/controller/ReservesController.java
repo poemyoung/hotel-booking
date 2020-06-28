@@ -64,9 +64,14 @@ public class ReservesController {
         //
         List<Reserves> reserves = reservesService.userGetReserves(userPhone);
 
+        return getResult(reserves);
+    }
+
+    private Result getResult(List<Reserves> reserves) {
+        Result res;
         List<OrderDetail> orderDetails = new ArrayList<>(setOrderDetails(reserves));
 
-        if(orderDetails == null){
+        if(orderDetails.size() == 0){
             //内部错误
             res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
             res.setMsg("参数类型错误！");
@@ -102,18 +107,7 @@ public class ReservesController {
         //System.out.println("hotelName:"+hotelName);
         List<Reserves> reserves = reservesService.adminGetReserves(hotelName);
 
-        List<OrderDetail> orderDetails = new ArrayList<>(setOrderDetails(reserves));
-
-        if(orderDetails == null){
-            //内部错误
-            res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
-            res.setMsg("参数类型错误！");
-        }
-        else {
-            res = Result.success(orderDetails);
-            System.out.println("订单查询成功！");
-        }
-        return res;
+        return getResult(reserves);
     }
 
     // 用户下订单

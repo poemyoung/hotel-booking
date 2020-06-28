@@ -56,7 +56,7 @@ public class AdminsController {
         //获取admin数据行
         Admins aAdmin =  adminsService.getAdminInfo(hotelTranslatedName);
         int hotelId = aAdmin.getHotelid();
-        return aAdmin == null ? Result.failure(ResultCode.USER_NOT_EXIST) :  Result.success(aAdmin);
+        return aAdmin.getHotelid() == null ? Result.failure(ResultCode.USER_NOT_EXIST) :  Result.success(aAdmin);
     }
 
     @ApiOperation(value = "酒店管理员更新本酒店信息",notes = "Hotel信息表单")
