@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public final class JwtMsg {
-    public static long EXPIRATION_TIME = 3600_000_000L;
-    public  static  String SECRET = "mySecret";
+    public static final long EXPIRATION_TIME = 3600_000_000L;
+    public  static final String SECRET = "mySecret";
 }
