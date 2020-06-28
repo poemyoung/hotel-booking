@@ -33,8 +33,6 @@ public interface HotelsMapper {
 
     Hotels selectByTranslatedName(String name);
 
-    int selectChainId(String chainName);
-    int selectBrandId(String brandName);
 
     @Select("SELECT COUNT(*) FROM hotels WHERE hotelTranslatedName = #{name}")
     int selectByName(String name);
