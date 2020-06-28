@@ -61,9 +61,10 @@ public class ReservesController {
         // 从Redis中获得用户电话
         String userPhone = jwtTokenMsg.getId(Authorization);
 
+
         //
         List<Reserves> reserves = reservesService.userGetReserves(userPhone);
-
+        System.out.println("?空");
         return getResult(reserves);
     }
 
@@ -73,8 +74,8 @@ public class ReservesController {
 
         if(orderDetails.size() == 0){
             //内部错误
-            res = Result.failure(ResultCode.PARAM_TYPE_BIND_ERROR);
-            res.setMsg("参数类型错误！");
+            res = Result.failure(ResultCode.RESULE_DATA_NONE);
+            res.setMsg("暂无订单!");
         }
         else {
             res = Result.success(orderDetails);

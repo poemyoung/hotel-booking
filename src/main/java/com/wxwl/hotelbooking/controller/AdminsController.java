@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class AdminsController {
     @Autowired(required = false)
     AdminsService adminsService;
@@ -44,7 +45,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("admins")
+    @GetMapping("/admins")
     //1.2 GET /admins	管理员查看管理员账号信息,本酒店及下属房间所有详细信息
     public Result getAdmins(@RequestHeader String Authorization){
         Result res;
