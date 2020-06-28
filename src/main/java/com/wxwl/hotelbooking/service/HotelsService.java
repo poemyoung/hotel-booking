@@ -61,12 +61,7 @@ public class HotelsService {
               return null;
         }
         //检查时间是否正确
-        if(checkInTime.compareTo(checkOutTime) >= 0)
-            return nullList;
-        else if(hotels == null)
-            //检查酒店列表
-            return  nullList;
-        else if(hotels.size() == 0)
+        if(checkInTime.compareTo(checkOutTime) >= 0 || hotels == null || hotels.size() == 0)
             return nullList;
 
         List<HotelResult> res = sMapper.searchByConditions(checkInTime,checkOutTime,num,hotels,page,pageSize);
