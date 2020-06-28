@@ -36,7 +36,8 @@
 
 
 
-        <table tableName="admins" domainObjectName="Admins"/>
+        <table tableName="brands" domainObjectName="Brands"/>
+        <table tableName="chains" domainObjectName="Chains"/>
 
 
 
