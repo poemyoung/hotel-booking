@@ -96,7 +96,7 @@ public class HotelsService {
         }
         String dealInput = "%"+location+"%";
         HotelsExample example = new HotelsExample();
-        List<Hotels> hotels = null;
+        List<Hotels> hotels;
         HotelsExample.Criteria criteria = example.createCriteria();
         HotelsExample.Criteria criteria1 = example.createCriteria();
         HotelsExample.Criteria criteria2 = example.createCriteria();
@@ -124,7 +124,9 @@ public class HotelsService {
         }
         //将查询出的数据缓存进redis
         ListOperations ops = redisTemplate.opsForList();
-        ops.leftPushAll(location,hotels);
+        if(hotels!=null && !hotels.isEmpty()) {
+            ops.leftPushAll(location, hotels);
+        }
         return hotels;
     }
 

@@ -5,7 +5,6 @@ import com.wxwl.hotelbooking.common.domain.Reserves;
 import com.wxwl.hotelbooking.common.domain.ReservesResult;
 import com.wxwl.hotelbooking.common.domain.Rooms;
 import com.wxwl.hotelbooking.common.jwt.JwtTokenMsg;
-import com.wxwl.hotelbooking.common.jwt.JwtUtil;
 import com.wxwl.hotelbooking.common.utils.Result;
 import com.wxwl.hotelbooking.common.utils.ResultCode;
 import com.wxwl.hotelbooking.mapper.HotelsMapper;
@@ -14,7 +13,6 @@ import com.wxwl.hotelbooking.service.ReservesService;
 import io.swagger.annotations.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
