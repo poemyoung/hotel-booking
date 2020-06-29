@@ -59,8 +59,8 @@ public class UsersInfoController {
         return Result.success(ResultCode.SUCCESS);
         }
 
-        @GetMapping("/users/{id}")
-        public Result getUserInfo(@PathVariable String id,@RequestHeader String Authorization){
+        @GetMapping("/users")
+        public Result getUserInfo(@RequestHeader String Authorization){
             Result res;
             String phone  = jwtTokenMsg.getId(Authorization);
             String role = jwtTokenMsg.getRole(Authorization);

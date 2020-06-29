@@ -180,8 +180,8 @@ public class ReservesController {
             orderDetail.setUseremail(reserve.getUseremail());
             orderDetail.setUsername(reserve.getUsername());
             orderDetail.setUserphone(reserve.getUserphone());
-            orderDetail.setHotels(hotelsMapper.selectByPrimaryKey(reserve.getHotelid()));
-            orderDetail.setRooms(roomsMapper.selectByPrimaryKey(reserve.getRoomid()));
+            orderDetail.setHotel(hotelsMapper.selectByPrimaryKey(reserve.getHotelid()));
+            orderDetail.setRoom(roomsMapper.selectByPrimaryKey(reserve.getRoomid()));
 
             orderDetails.add(orderDetail);
         }
@@ -191,9 +191,9 @@ public class ReservesController {
 
     @Data
     private class OrderDetail {
-        private Rooms rooms;
+        private Rooms room;
 
-        private Hotels hotels;
+        private Hotels hotel;
 
         private Integer id;
 
@@ -213,20 +213,20 @@ public class ReservesController {
 
         private Long price;
 
-        public Rooms getRooms() {
-            return rooms;
+        public Rooms getRoom() {
+            return room;
         }
 
-        public void setRooms(Rooms rooms) {
-            this.rooms = rooms;
+        public void setRoom(Rooms room) {
+            this.room = room;
         }
 
-        public Hotels getHotels() {
-            return hotels;
+        public Hotels getHotel() {
+            return hotel;
         }
 
-        public void setHotels(Hotels hotels) {
-            this.hotels = hotels;
+        public void setHotel(Hotels hotel) {
+            this.hotel = hotel;
         }
 
         public Integer getId() {
@@ -301,9 +301,9 @@ public class ReservesController {
             this.price = price;
         }
 
-        public OrderDetail(Rooms rooms, Hotels hotels, Integer id, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, ReservesService.PayWay pay, Long price) {
-            this.rooms = rooms;
-            this.hotels = hotels;
+        public OrderDetail(Rooms rooms, Hotels hotel, Integer id, Date createat, String username, String userphone, String useremail, Date checkinat, Date checkoutat, ReservesService.PayWay pay, Long price) {
+            this.room = rooms;
+            this.hotel = hotel;
             this.id = id;
             this.createat = createat;
             this.username = username;
