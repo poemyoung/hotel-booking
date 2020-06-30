@@ -32,7 +32,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/admins/orders/{id}")
+    @GetMapping("/api/admins/orders/{id}")
     //1.1 GET /admins/reserves	管理员查看本酒店所有订单详细信息
     public Object GetReserves(@PathVariable("id")int hotelId,String checkIn){
         List<Reserves> reserves = adminsService.getReserves(hotelId, checkIn);
@@ -45,7 +45,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/admins")
+    @GetMapping("/api/admins")
     //1.2 GET /admins	管理员查看管理员账号信息,本酒店及下属房间所有详细信息
     public Result getAdmins(@RequestHeader String Authorization){
         Result res;
@@ -66,7 +66,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @PutMapping("/admins/hotels")
+    @PutMapping("/api/admins/hotels")
     @ResponseBody
     //1.3 PUT /admins/hotels		管理员提交表单更新本酒店详细信息
     public Object updateHotel(@RequestHeader String Authorization,@ModelAttribute HotelTmp hotelTmp){
@@ -90,7 +90,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @DeleteMapping("/admins/hotels")
+    @DeleteMapping("/api/admins/hotels")
     @ResponseBody
     //1.4 DELETE /admins/hotels	管理员删除本账号、本酒店及下属房间的详细信息
     public Object deleteHotel(@RequestHeader String Authorization){
@@ -105,7 +105,7 @@ public class AdminsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @PostMapping("/admins/hotels")
+    @PostMapping("/api/admins/hotels")
     @ResponseBody
     //1.5 POST /admins/hotels	管理员提交表单插入一条本酒店信息
     public Object addHotel(@RequestHeader String Authorization,@ModelAttribute HotelTmp hotelTmp){

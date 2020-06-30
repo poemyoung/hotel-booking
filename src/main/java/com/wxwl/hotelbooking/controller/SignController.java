@@ -22,7 +22,7 @@ public class SignController {
     @Autowired
     SignService signService;
 
-    @PostMapping("/register")
+    @PostMapping("/api/register")
     public Result SignUp(@RequestHeader("X-Role") String role, @ModelAttribute  UserTmp userTmp){
         String phone = userTmp.getPhone();
         String password = userTmp.getPassword();
@@ -47,7 +47,7 @@ public class SignController {
         return res;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public Result SignIn(@RequestHeader("X-Role") String role,@ModelAttribute UserTmp userTmp){
         Result res = new Result();
         if(userTmp == null||userTmp.getPhone() == null){

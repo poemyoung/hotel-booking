@@ -30,7 +30,7 @@ public class ChainsAndBrandsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/chains")
+    @GetMapping("/api/chains")
     @ResponseBody
     public Object getChains(){
         List<Chains> chains = chainsMapper.selectAll();
@@ -44,7 +44,7 @@ public class ChainsAndBrandsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/brands")
+    @GetMapping("/api/brands")
     @ResponseBody
     public Object getBrands(){
         List<Brands> brands = brandsMapper.selectAll();

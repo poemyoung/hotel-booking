@@ -38,7 +38,7 @@ public class HotelsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/hotels")
+    @GetMapping("/api/hotels")
     public Result findHotels(@RequestParam(defaultValue = "Chengdu") String location,
                                              @RequestParam(defaultValue = "2020-6-12") String checkInTime,
                                              @RequestParam(defaultValue = "2020-6-13") String checkOutTime,
@@ -71,7 +71,7 @@ public class HotelsController {
             @ApiResponse(code= 400,message = "Params Error"),
             @ApiResponse(code = 404,message = "Not Found")
     })
-    @GetMapping("/hotels/{id}")
+    @GetMapping("/api/hotels/{id}")
     // /accommodations/id?hotelId=1297&checkInTime=2020-06-14&checkOutTime=2020-06-21
     //查看酒店A详情
     public Object showHotel(@PathVariable("id") int hotelId,

@@ -25,7 +25,7 @@ public class UsersInfoController {
     @Autowired
     UsersInfoService usersInfoService;
 
-    @PutMapping("/users")
+    @PutMapping("/api/users")
     public Result modifyUserInfo(@RequestHeader String Authorization,
                        @RequestParam(value = "avatar",defaultValue = "default1.jpg") MultipartFile avatar,
                        @RequestParam(defaultValue = "") String idCard,
@@ -60,7 +60,7 @@ public class UsersInfoController {
         return Result.success(ResultCode.SUCCESS);
         }
 
-        @GetMapping("/users/{id}")
+        @GetMapping("/api/users/{id}")
         public Result getUserInfo(@RequestHeader String Authorization, @PathVariable String id){
             Result res;
             String phone  = jwtTokenMsg.getId(Authorization);

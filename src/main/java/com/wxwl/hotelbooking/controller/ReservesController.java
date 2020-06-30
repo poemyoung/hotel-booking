@@ -43,12 +43,12 @@ public class ReservesController {
     })
 
     // 用户查看订单
-    @GetMapping("/reserves")
+    @GetMapping("/api/reserves")
     public Result UserGetReserves(@RequestHeader String Authorization) {
         Result res;
-
+        System.out.println(Authorization+"??????");
         // 判断用户类型
-        if(!jwtTokenMsg.getRole(Authorization).equals("user"))
+        if(jwtTokenMsg == null || jwtTokenMsg.getRole(Authorization) == null||!jwtTokenMsg.getRole(Authorization).equals("user"))
         {
             System.out.println("你不是用户！");
             res = Result.failure(ResultCode.DATA_IS_WRONG);
@@ -83,7 +83,7 @@ public class ReservesController {
     }
 
     // 酒店管理员查看订单
-    @GetMapping("/admins/reserves")
+    @GetMapping("/api/admins/reserves")
     public Result adminGetReserves(@RequestHeader String Authorization) {
         Result res;
 
@@ -110,7 +110,7 @@ public class ReservesController {
     }
 
     // 用户下订单
-    @PostMapping("/reserves")
+    @PostMapping("/api/reserves")
 
     @ApiOperation(value = "根据条件显示某酒店详情",notes = "酒店id,入住时间和离店时间")
     @ApiImplicitParams({
