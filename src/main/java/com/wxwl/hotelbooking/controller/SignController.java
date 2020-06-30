@@ -15,7 +15,7 @@ import java.util.HashMap;
  * 用户注册和登录
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",maxAge = 3600)
 @Api("用户注册和登录api")
 public class SignController {
 

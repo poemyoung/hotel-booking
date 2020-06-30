@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",maxAge = 3600)
 public class AdminsController {
     @Autowired(required = false)
     AdminsService adminsService;

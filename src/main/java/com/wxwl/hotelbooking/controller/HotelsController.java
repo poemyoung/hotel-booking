@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",maxAge = 3600)
 @Api("酒店搜索相关Api")
 public class HotelsController {
     @Autowired

@@ -17,6 +17,7 @@ import java.util.Map;
  * 图片上载
  */
 @RestController
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",maxAge = 3600)
 public class UsersInfoController {
     @Autowired
     JwtTokenMsg jwtTokenMsg ;
@@ -59,8 +60,8 @@ public class UsersInfoController {
         return Result.success(ResultCode.SUCCESS);
         }
 
-        @GetMapping("/users")
-        public Result getUserInfo(@RequestHeader String Authorization){
+        @GetMapping("/users/{id}")
+        public Result getUserInfo(@RequestHeader String Authorization, @PathVariable String id){
             Result res;
             String phone  = jwtTokenMsg.getId(Authorization);
             String role = jwtTokenMsg.getRole(Authorization);

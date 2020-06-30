@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",maxAge = 3600)
 @Api("预订酒店相关Api")
 
 public class ReservesController {
