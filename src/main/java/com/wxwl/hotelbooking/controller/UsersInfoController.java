@@ -28,7 +28,7 @@ public class UsersInfoController {
     @PutMapping("/api/users/{id}")
     public Result modifyUserInfo(
             @RequestHeader String Authorization,
-                       @RequestParam(value = "avatar",defaultValue = "default1.jpg") MultipartFile avatar,
+                       @RequestParam(value = "avatar") MultipartFile avatar,
                        @RequestParam(defaultValue = "") String idCard,
                        @RequestParam(defaultValue = "") String pwd,
                        @RequestParam(defaultValue = "") String email,

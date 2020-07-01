@@ -45,6 +45,7 @@ public class HotelsController {
                                              @RequestParam(defaultValue = "2") int numOfCustomers,
                                              @RequestParam(defaultValue = "1") int pageNo,
                                              @RequestParam(defaultValue = "-1") int pageSize){
+        System.out.println("numOfCustons=" + numOfCustomers);
         List<HotelResult> list =  hotelsService.findHotels(location,checkInTime,checkOutTime,numOfCustomers,pageNo,pageSize);
         Result res ;
         if(list == null){

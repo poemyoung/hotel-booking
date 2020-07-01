@@ -45,11 +45,7 @@ public class ReservesController {
     // 用户查看订单
     @GetMapping("/api/reserves")
     public Result UserGetReserves(@RequestHeader String Authorization) {
-        System.out.println("Authorization="+Authorization);
         Result res;
-        if(jwtTokenMsg.getRole(Authorization) == null){
-            System.out.println("????^^^^^^^^");
-        }
         // 判断用户类型
         if(jwtTokenMsg == null || jwtTokenMsg.getRole(Authorization) == null||!jwtTokenMsg.getRole(Authorization).equals("user"))
         {
