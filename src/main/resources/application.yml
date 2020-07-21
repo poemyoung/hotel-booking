@@ -51,6 +51,20 @@ jwt:
 spring.servlet.multipart.max-file-size: 100MB
 spring.servlet.multipart.max-request-size: 1000MB
 
+# rabbitmq连接参数
+spring.rabbitmq.host: localhost # mq ip地址
+spring.rabbitmq.port: 5672 # 端口 默认5672
+spring.rabbitmq.username: guest # 用户名
+spring.rabbitmq.password: guest # 密码
+# 开启发送确认(开启此模式，生产者成功发送到交换机后执行相应的回调函数)
+#spring.rabbitmq.publisher-confirms=true
+# 开启发送失败退(开启此模式，交换机路由不到队列时执行相应的回调函数)
+#spring.rabbitmq.publisher-returns=true
+# 开启消费者手动确认 ACK 默认auto
+#spring.rabbitmq.listener.direct.acknowledge-mode=manual
+#spring.rabbitmq.listener.simple.acknowledge-mode=manual
+
+
 
 
 
