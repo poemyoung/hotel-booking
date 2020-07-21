@@ -65,6 +65,7 @@ public class ReservesService {
     }
 
     public ReservesResult addReserve(Integer hotelId,Integer roomId,String userPhone,String checkIn,String checkOut,Integer numOfCustomers,String payway){
+
         // 检查hotelId
         if( hotelsMapper.selectByPrimaryKey(hotelId) == null)
         {
